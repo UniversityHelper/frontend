@@ -1,0 +1,215 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;        /* чистый синий, не использую */
+            --primary-light: #3b82f6;
+            --primary-soft: #dbeafe;   /* очень светлый фон для акцентов */
+            --bg-page: #f8fafc;        /* светло-серый с холодным отливом */
+            --surface: #ffffff;
+            --text-dark: #0f172a;       /* основной текст */
+            --text-soft: #334155;       /* второстепенный текст */
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --shadow-input: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+            --radius-lg: 32px;
+            --radius-md: 24px;
+            --radius-sm: 18px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 20px 32px 20px;
+            margin: 0;
+            background: #FFFFFF; /* linear-gradient(145deg,#f9fcff 0%,#f1f6fd 100%)*/
+        }
+
+        /* основной контейнер скругленныый */
+        .landing-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .uni-title{
+            position:absolute;
+            top:60px;
+            left:55%;
+            transform:translateX(-5%);
+            text-align:left;
+        }
+
+        .uni-title h1{
+            font-size:64px;
+            font-weight:700;
+            color:#42454F;
+        }
+
+        .slogan{
+            font-size:24px;
+            color: #8A9AAB; /* 555  #98B0C5 */
+            margin-top:5px;
+        }
+
+        /*конпка*/
+        .chat-button{
+            margin-top:100px;
+            margin-left: 20px;
+            display:inline-block;
+            background:#FEEFD3; /*#3b82f6; */
+            color: black;
+            font-size:20px;
+            padding:16px 34px;
+            border-radius:40px;
+            text-decoration:none;
+            font-weight:500;
+            transition:all 0.25s ease;
+            position:relative;
+            overflow:hidden;
+
+        }
+
+        .chat-button:hover{
+            background:  #CBE4F9; /*#2563eb; #BDE8EF  #CBE4F9*/
+        }
+
+        .chat-button span{
+            position:absolute;
+            background:rgba(255,255,255,0.4);
+            border-radius:50%;
+            transform:scale(0);
+            animation:ripple 0.6s linear;
+
+        }
+
+        @keyframes ripple{
+            to{
+                transform:scale(4);
+                opacity:0;
+            }
+        }
+
+
+        /* шапка */
+        /*.header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 0.5rem 0;
+        }*/
+        
+         /*логотип*/
+        /*.title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transform: translateX(35px);
+        }*/
+
+        /*.header .slogan {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            font-weight: 400;
+            color: var(--text-soft);
+            margin-top: 0.25rem;
+            border-bottom: 2px solid transparent; 
+            transform: translateX(15px);
+        } */
+
+
+        .center-image {
+            text-align: center;
+        }
+        
+        .image1 {
+            height: 26%; 
+            width: 26%;
+            text-align: center;
+            transform: translateX(-350px) translateY(0px);
+            margin: 75px 0px 5px 0px;
+        }
+
+        /*.header h1 {
+            font-size: clamp(2.8rem, 12vw, 4.2rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-dark);
+            line-height: 1.1;
+        }*/
+
+
+        /* основной блок с описанием */
+        .hero {
+            background-color: var(--surface);
+            backdrop-filter: blur(2px);
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255,255,255,0.6);
+            background: #f3efef; /* f2eeee #EFEBEB #f4f0f0 rgba(255,255,255,0.8); #DBD9DA */
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s ease;
+            
+        }
+
+        .hero h2 {
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #a9c9e8; /* 42454F; #4A90E2;*/
+            max-width: 900px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            margin-bottom: 1rem;
+            max-width: 850px;
+            color: #555;
+        }
+
+        /* выделенный цветом текст в основном блоке информации */
+        .accent-uni {
+            font-weight: 600;
+            color: #4A90E2;
+        }
+
+       /* .hero p:last-of-type {
+            margin-bottom: 0;
+        }*/
+
+        /* голубая плашка с акцентом на достоверность */
+        .trust-badge {
+            background-color: #ddebfc; /* var(--primary-soft) */
+            padding: 0.8rem 1.2rem;
+            border-radius: 60px;
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-weight: 500;
+            color: #4A90E2;
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            font-size: 0.95rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .trust-badge svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+            fill: currentColor;
+        }
+
