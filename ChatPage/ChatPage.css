@@ -157,7 +157,7 @@
         /* блок самого сообщения + хвостик */
         .message-bubble {
             max-width: 75%;
-            padding: 12px 18px;
+            padding: 10px 18px;
             border-radius: 24px;
             font-size: 1rem;
             line-height: 1.5;
@@ -192,7 +192,7 @@
             width: fit-content;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             border: 1px solid rgba(74, 144, 226, 0.2);
-            margin-left: 52px;  /* сдвиг под аватар */
+            margin-left: 10px;  /* сдвиг под аватар */
         }
         .typing-indicator span {
             width: 9px;
@@ -323,7 +323,7 @@
         }
 
         .send-btn {
-            background: #CBE4F9;  /*#FFD100 */
+            background: #CBE4F9;
             border: none;
             width: 52px;
             height: 52px;
@@ -336,7 +336,7 @@
             cursor: pointer;
             transition: 0.15s;
             box-shadow: 0 6px 12px -6px #CBE4F9;
-            margin-left: 8px;  
+            margin-left: 5px;
         }
         .send-btn:hover {
             background: #CBE4F9;  
@@ -353,8 +353,6 @@
             transform: scale(1.03);
         }  
 
-
-
         .footer-note {
             text-align: center;
             margin-top: 10px;
@@ -366,6 +364,64 @@
             color: #4A90E2;
             font-size: 0.7rem;
             margin: 0 2px;
+        }
+
+        .chat-start-block {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-width: 980px;
+        }
+
+        .question-hints {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .question-hint {
+            background: #EAF3FF;
+            color: #4A90E2;
+            border: 1px solid #A9C9F7;
+            border-radius: 999px;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .question-hint:hover {
+            background: #dcecff;
+        }
+
+        .hint-note {
+            margin-left: 52px;
+            color: #6f7f9a;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ai-bubble ul,
+        .ai-bubble ol {
+            margin: 8px 0 0 0;
+            padding-left: 22px;
+            list-style-position: outside;
+        }
+
+        .ai-bubble li {
+            margin: 6px 0;
+        }
+
+        .ai-bubble p {
+            margin: 0;
+        }
+
+        .ai-bubble p + ul,
+        .ai-bubble p + ol {
+            margin-top: 8px;
         }
 
         /* адаптация для мобильных */

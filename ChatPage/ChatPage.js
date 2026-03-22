@@ -1,200 +1,289 @@
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM loaded");
-    
-    (function() {
-        const answersDB = {
-            documents: "📄 Для поступления обычно нужны: паспорт, СНИЛС, аттестат/диплом, результаты ЕГЭ, заявление (заполняется в вузе) и 2-4 фотографии 3x4. Точный список лучше уточнить на сайте конкретного вуза.",
-            
-            terms: "📅 Приемная кампания обычно стартует 20 июня. Основные этапы:<br>• 20 июня — начало приема документов<br>• 25 июля — завершение приема от поступающих по ЕГЭ<br>• 3–9 августа — издание приказов о зачислении.",
-            
-            scores: "📊 Минимальные баллы ЕГЭ для поступления в вузы в 2026 году (утверждены приказом Минобрнауки от 14.11.2025 №881):<br><br>• русский язык — 40<br>• математика профиль — 40<br>• физика — 41<br>• информатика — 46<br>• история, литература, география, биология, химия, иностранные языки — 40<br>• обществознание — 45<br><br>💡 Для бюджета в топ-вузах баллы намного выше!",
-            
-            choose: "🏛 Рекомендую обратить внимание на:<br>1) аккредитацию вуза<br>2) проходные баллы прошлых лет<br>3) отзывы студентов<br>4) наличие бюджетных мест<br>5) расположение и инфраструктуру.",
-            
-            benefits: "🎓 Льготы при поступлении есть у:<br>• олимпиадников (БВИ)<br>• инвалидов I и II групп<br>• детей-сирот<br>• ветеранов боевых действий<br><br>Также есть квота для детей участников СВО.",
-            
-            default: "Спасибо за вопрос! К сожалению, сейчас я не могу дать на него ответ."
-        };
+document.addEventListener("DOMContentLoaded", () => {
+    const chatMessages = document.getElementById("chatMessages");
+    const userInput = document.getElementById("userInput");
+    const sendButton = document.getElementById("sendButton");
+    const hintButtons = document.querySelectorAll(".question-hint");
+    const API_URL = "http://localhost:5000/api/chat/message";
 
-        const questionToKey = {
-            "Какие документы нужны?": "documents",
-            "Сроки подачи заявлений": "terms",
-            "Минимальные баллы ЕГЭ": "scores",
-            "Как выбрать вуз?": "choose",
-            "Льготы при поступлении": "benefits"
-        };
+    const questionToKey = {
+        "Какие документы нужны?": "documents",
+        "Сроки подачи заявлений": "terms",
+        "Минимальные баллы ЕГЭ": "scores",
+        "Как выбрать вуз?": "choose",
+        "Льготы при поступлении": "benefits"
+    };
 
-        const quickRepliesList = [
-            "Какие документы нужны?",
-            "Сроки подачи заявлений",
-            "Минимальные баллы ЕГЭ",
-            "Как выбрать вуз?",
-            "Льготы при поступлении"
+    const preparedAnswers = {
+        documents: {
+            answer:
+                "📄 Для поступления обычно нужны: паспорт, СНИЛС, аттестат/диплом, результаты ЕГЭ, заявление (заполняется в вузе) и 2-4 фотографии 3x4. Точный список лучше уточнить на сайте конкретного вуза.",
+            sources: [
+                { title: "Правила приема УрФУ", url: "https://urfu.ru/" }
+            ]
+        },
+        terms: {
+            answer: `
+        <p>📅 Приемная кампания обычно стартует 20 июня. Основные этапы:</p>
+        <ul>
+            <li>20 июня — начало приема документов</li>
+            <li>25 июля — завершение приема от поступающих по ЕГЭ</li>
+            <li>3-9 августа — издание приказов о зачислении</li>
+        </ul>`,
+            sources: [
+                { title: "Информация для абитуриентов", url: "https://urfu.ru/" }
+            ]
+        },
+
+        scores: {
+            answer: `
+        <p>📊 Минимальные баллы ЕГЭ для поступления в вузы в 2026 году:</p>
+        <ul>
+            <li>русский язык — 40</li>
+            <li>математика профиль — 40</li>
+            <li>физика — 41</li>
+            <li>информатика — 46</li>
+            <li>история, литература, география, биология, химия, иностранные языки — 40</li>
+            <li>обществознание — 45</li>
+        </ul>
+        <p>💡 Для бюджета в топ-вузах баллы намного выше.</p>`,
+            sources: [
+                { title: "Правила приема УрФУ", url: "https://urfu.ru/" }
+            ]
+        },
+
+        choose: {
+            answer: `
+        <p>🏛 При выборе вуза советую обратить внимание на:</p>
+        <ol>
+            <li>аккредитацию вуза</li>
+            <li>проходные баллы прошлых лет</li>
+            <li>отзывы студентов</li>
+            <li>наличие бюджетных мест</li>
+            <li>расположение и инфраструктуру</li>
+        </ol>`,
+            sources: [
+                { title: "Образовательные программы УрФУ", url: "https://urfu.ru/" }
+            ]
+        },
+
+        benefits: {
+            answer: `
+        <p>🎓 Льготы при поступлении есть у:</p>
+        <ul>
+            <li>олимпиадников (БВИ)</li>
+            <li>инвалидов I и II групп</li>
+            <li>детей-сирот</li>
+            <li>ветеранов боевых действий</li>
+        </ul>
+        <p>Также есть квота для детей участников СВО.</p>`,
+            sources: [
+                { title: "Правила приема УрФУ", url: "https://urfu.ru/" }
+            ]
+        }
+    };
+
+    function scrollToBottom() {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addUserMessage(text) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "message-wrapper user";
+
+        const bubble = document.createElement("div");
+        bubble.className = "message-bubble user-bubble";
+        bubble.innerText = text;
+
+        wrapper.appendChild(bubble);
+        chatMessages.appendChild(wrapper);
+        scrollToBottom();
+    }
+
+    function addAiMessage(text, sources = []) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "message-wrapper ai";
+
+        const avatar = document.createElement("div");
+        avatar.className = "ai-avatar-message";
+        avatar.innerHTML = `<img src="ai-avatar.png" alt="AI">`;
+
+        const bubble = document.createElement("div");
+        bubble.className = "message-bubble ai-bubble";
+        bubble.innerHTML = text;
+
+        wrapper.appendChild(avatar);
+        wrapper.appendChild(bubble);
+        chatMessages.appendChild(wrapper);
+
+        if (sources.length > 0) {
+            const sourcesWrapper = document.createElement("div");
+            sourcesWrapper.className = "message-wrapper ai";
+
+            const spacer = document.createElement("div");
+            spacer.className = "ai-avatar-message";
+            spacer.style.visibility = "hidden";
+
+            const sourcesBubble = document.createElement("div");
+            sourcesBubble.className = "message-bubble ai-bubble";
+
+            const title = document.createElement("div");
+            title.style.fontWeight = "600";
+            title.style.marginBottom = "8px";
+            title.textContent = "Источники:";
+            sourcesBubble.appendChild(title);
+
+            sources.forEach(source => {
+                const link = document.createElement("a");
+                link.href = source.url;
+                link.textContent = source.title || source.url;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                link.style.display = "block";
+                link.style.marginBottom = "6px";
+                sourcesBubble.appendChild(link);
+            });
+
+            sourcesWrapper.appendChild(spacer);
+            sourcesWrapper.appendChild(sourcesBubble);
+            chatMessages.appendChild(sourcesWrapper);
+        }
+
+        scrollToBottom();
+    }
+
+    function addTypingIndicator() {
+        const wrapper = document.createElement("div");
+        wrapper.className = "message-wrapper ai";
+        wrapper.id = "typingWrapper";
+
+        const avatar = document.createElement("div");
+        avatar.className = "ai-avatar-message";
+        avatar.innerHTML = `<img src="ai-avatar.png" alt="AI">`;
+
+        const indicator = document.createElement("div");
+        indicator.className = "typing-indicator";
+        indicator.innerHTML = "<span></span><span></span><span></span>";
+
+        wrapper.appendChild(avatar);
+        wrapper.appendChild(indicator);
+
+        chatMessages.appendChild(wrapper);
+        scrollToBottom();
+    }
+
+    function removeTypingIndicator() {
+        const typing = document.getElementById("typingWrapper");
+        if (typing) {
+            typing.remove();
+        }
+    }
+
+    function getPreparedAnswer(message) {
+        const trimmed = message.trim();
+
+        if (questionToKey[trimmed]) {
+            const key = questionToKey[trimmed];
+            return preparedAnswers[key] || null;
+        }
+
+        return null;
+    }
+
+    function shouldUseModel(message) {
+        const normalized = message.toLowerCase();
+        const specificMarkers = [
+            "09.",
+            "бакалавр",
+            "бакалавриат",
+            "магистрат",
+            "магистратура",
+            "очно",
+            "заочно",
+            "очно-заочно",
+            "прикладная информатика",
+            "информатика и вычислительная техника",
+            "программная инженерия",
+            "урфу",
+            "бюджет",
+            "мест",
+            "какие экзамены",
+            "какие вступительные"
         ];
 
-        const messagesContainer = document.getElementById('chatMessages');
-        const userInput = document.getElementById('userInput');
-        const sendButton = document.getElementById('sendButton');
+        return specificMarkers.some(marker => normalized.includes(marker));
+    }
 
-        function createMessageElement(text, sender) {
-            const wrapper = document.createElement('div');
-            wrapper.className = `message-wrapper ${sender}`;
-
-            if (sender === 'ai') {
-                const avatar = document.createElement('div');
-                avatar.className = 'ai-avatar-message';
-                avatar.innerHTML = '<img src="ai-avatar.png" alt="AI">';
-                wrapper.appendChild(avatar);
-            }
-
-            const bubble = document.createElement('div');
-            bubble.className = 'message-bubble';
-            
-            if (text.includes('<br>') || text.includes('<br/>')) {
-                bubble.innerHTML = text; 
-            } else {
-                bubble.textContent = text; 
-            }
-            
-            wrapper.appendChild(bubble);
-
-            return wrapper;
+    async function sendMessage(customMessage = null) {
+        const message = customMessage || userInput.value.trim();
+        if (!message) {
+            return;
         }
 
-        function createTypingIndicator() {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'message-wrapper ai';
-            wrapper.id = 'typingIndicator';
-
-            const avatar = document.createElement('div');
-            avatar.className = 'ai-avatar-message';
-            avatar.innerHTML = '<img src="ai-avatar.png" alt="AI">';
-            wrapper.appendChild(avatar);
-
-            const indicator = document.createElement('div');
-            indicator.className = 'typing-indicator';
-            indicator.innerHTML = '<span></span><span></span><span></span>';
-            wrapper.appendChild(indicator);
-
-            return wrapper;
+        addUserMessage(message);
+        if (!customMessage) {
+            userInput.value = "";
         }
 
-        function appendMessage(text, sender) {
-            const msg = createMessageElement(text, sender);
-            messagesContainer.appendChild(msg);
-            scrollToBottom();
-        }
+        sendButton.disabled = true;
+        const prepared = getPreparedAnswer(message);
 
-        function scrollToBottom() {
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function removeTypingIndicator() {
-            const typing = document.getElementById('typingIndicator');
-            if (typing) typing.remove();
-        }
-
-        function replyWithKey(key) {
-            const answer = answersDB[key] || answersDB.default;
-            appendMessage(answer, 'ai');
-        }
-
-        function handleChipClick(questionText) {
-            appendMessage(questionText, 'user');
-            
-            const typing = createTypingIndicator();
-            messagesContainer.appendChild(typing);
-            scrollToBottom();
-
-            const key = questionToKey[questionText] || 'default';
+        if (prepared && !shouldUseModel(message)) {
+            addTypingIndicator();
             setTimeout(() => {
                 removeTypingIndicator();
-                replyWithKey(key);
-            }, 1300);
+                addAiMessage(prepared.answer, prepared.sources || []);
+                sendButton.disabled = false;
+                userInput.focus();
+            }, 500);
+
+            return;
         }
 
-        function handleUserMessage(message) {
-            if (!message.trim()) return;
-            
-            appendMessage(message, 'user');
-            userInput.value = '';
-
-            const typing = createTypingIndicator();
-            messagesContainer.appendChild(typing);
-            scrollToBottom();
-
-            setTimeout(() => {
-                removeTypingIndicator();
-                appendMessage(answersDB.default, 'ai');
-            }, 1400);
-        }
-
-        function buildInitialChat() {
-            messagesContainer.innerHTML = '';
-
-            // Приветственное сообщение
-            const welcomeWrapper = document.createElement('div');
-            welcomeWrapper.className = 'message-wrapper ai';
-
-            const avatar = document.createElement('div');
-            avatar.className = 'ai-avatar-message';
-            avatar.innerHTML = '<img src="ai-avatar.png" alt="AI">';
-            welcomeWrapper.appendChild(avatar);
-
-            const bubble = document.createElement('div');
-            bubble.className = 'message-bubble';
-            bubble.textContent = 'Привет! Я AI-помощник UniHelper. Работаю с официальными документами вузов и знаю всё о поступлении! Напиши свой вопрос или выбери из предложенных';
-            welcomeWrapper.appendChild(bubble);
-            messagesContainer.appendChild(welcomeWrapper);
-
-            // Чипсы
-            const quickDiv = document.createElement('div');
-            quickDiv.className = 'quick-replies';
-            quickRepliesList.forEach(q => {
-                const chip = document.createElement('span');
-                chip.className = 'quick-chip';
-                chip.textContent = q;
-                chip.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    handleChipClick(q);
-                });
-                quickDiv.appendChild(chip);
+        addTypingIndicator();
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: message })
             });
-            messagesContainer.appendChild(quickDiv);
 
-            // Подпись
-            const note = document.createElement('div');
-            note.className = 'info-note';
-            note.innerHTML = '<i class="fa-regular fa-lightbulb"></i> Кликни по вопросу — узнаешь ответ';
-            messagesContainer.appendChild(note);
+            const data = await response.json();
+            removeTypingIndicator();
 
-            scrollToBottom();
+            if (!response.ok) {
+                addAiMessage("Ошибка сервера. Попробуйте позже.");
+                console.error("Chat API error:", data);
+
+                return;
+            }
+
+            addAiMessage(data.answer || "Нет ответа", data.sources || []);
+        } catch (error) {
+            removeTypingIndicator();
+            addAiMessage("Не удалось подключиться к серверу.");
+            console.error("Fetch error:", error);
+        } finally {
+            sendButton.disabled = false;
+            userInput.focus();
         }
+    }
 
-        sendButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            handleUserMessage(userInput.value);
+    sendButton.addEventListener("click", () => {
+        sendMessage();
+    });
+
+    userInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            sendMessage();
+        }
+    });
+
+    hintButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const question = button.textContent.trim();
+            sendMessage(question);
         });
-
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleUserMessage(userInput.value);
-            }
-        });
-
-        buildInitialChat();
-
-        const inputField = document.getElementById ('userInput');
-        const sendBtn = document.querySelector ('.send-btn')
-
-        inputField.addEventListener('input', function() {
-            if (/\S/.test(this.value)) {
-                sendBtn.classList.add('active');
-            } else {
-                sendBtn.classList.remove('active');
-            }
-        })
-    })();
-    
+    });
 });
