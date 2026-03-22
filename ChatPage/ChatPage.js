@@ -1,4 +1,7 @@
-(function() {
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM loaded");
+    
+    (function() {
         const answersDB = {
             documents: "📄 Для поступления обычно нужны: паспорт, СНИЛС, аттестат/диплом, результаты ЕГЭ, заявление (заполняется в вузе) и 2-4 фотографии 3x4. Точный список лучше уточнить на сайте конкретного вуза.",
             
@@ -144,7 +147,7 @@
             welcomeWrapper.appendChild(bubble);
             messagesContainer.appendChild(welcomeWrapper);
 
-            // Блоки шаблон вопросов
+            // Чипсы
             const quickDiv = document.createElement('div');
             quickDiv.className = 'quick-replies';
             quickRepliesList.forEach(q => {
@@ -186,10 +189,12 @@
         const sendBtn = document.querySelector ('.send-btn')
 
         inputField.addEventListener('input', function() {
-            if (this.value.length > 0) {
+            if (/\S/.test(this.value)) {
                 sendBtn.classList.add('active');
             } else {
                 sendBtn.classList.remove('active');
             }
         })
     })();
+    
+});

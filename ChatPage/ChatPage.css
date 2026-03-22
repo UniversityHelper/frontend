@@ -207,10 +207,10 @@
 
         @keyframes typingFade {
             0%, 60%, 100% { opacity: 0.4; transform: scale(1); }
-            30% { opacity: 1; transform: scale(1.2); background: #FFD100; }
+            30% { opacity: 1; transform: scale(1.2); background: #FEEFD3; }
         }
 
-        /* блок быстрых чипсов (шаблонов) */
+        /* блок быстрых шаблонных вопросов */
         .quick-replies {
             display: flex;
             flex-wrap: wrap;
@@ -222,7 +222,7 @@
         .quick-chip {
             background: #e9f0fe;  /* очень светлый голубой */
             border: 1px solid #b8d1f5;
-            color: #4A90E2; /*тот самый синий 0b2b4f; в шаблонах*/
+            color: #4A90E2; /*тот синий 0b2b4f;*/
             font-weight: 500;
             padding: 10px 18px;
             border-radius: 40px;
@@ -339,8 +339,8 @@
             margin-left: 8px;  
         }
         .send-btn:hover {
-            background: #4A90E2;  
-            box-shadow: 0 6px 12px -6px #4A90E2;
+            background: #CBE4F9;  
+            box-shadow: 0 6px 12px -6px #CBE4F9;
             transform: scale(1.03);
         }
         .send-btn i {
