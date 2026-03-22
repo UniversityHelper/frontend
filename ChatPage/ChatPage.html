@@ -1,0 +1,51 @@
+!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>UniHelper AI — Чат с агентом</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="ChatPage.css">
+    <script src="ChatPage.js"></script>
+</head>
+<body>
+<div class="chat-container">
+    <!-- HEADER -->
+    <div class="chat-header">
+        <div class="header-left">
+            <a href="HomePage.html" class="back-btn" aria-label="Назад">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        </div>
+        <div class="header-center">
+            <div class="ai-avatar-header">
+                <img src="ai-avatar.png" alt="UniHelper">
+            </div>
+            <span>UniHelper AI</span>
+        </div>
+        <div class="header-right">
+        </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="chat-messages" id="chatMessages"></div>
+
+    <!-- FOOTER / INPUT -->
+    <div class="chat-footer">
+        <div class="input-container">
+            <input type="text" id="userInput" class="user-input" placeholder="Какой у тебя вопрос?" autocomplete="off">
+            <button class="send-btn" id="sendButton"><i class="fas fa-paper-plane"></i></button>
+        </div>
+        <div class="footer-note">
+            <i class="fas fa-check-circle" style="color: #4A90E2;"></i> Ответы на основе официальных документов вузов
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
