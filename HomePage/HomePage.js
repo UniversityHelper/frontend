@@ -36,10 +36,10 @@ if (chatButton) {
             await fetch("http://localhost:5000/api/analytics/click", {
                 method: "POST"
             });
-
-            alert("🚧 Сервис в разработке. Скоро будет доступен!")
         } catch (error) {
             console.error("Click error:", error);
         }
+
+        window.location.href = "../ChatPage/ChatPage.html";
     })
 }

@@ -16,10 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const preparedAnswers = {
         documents: {
             answer:
-                "📄 Для поступления обычно нужны: паспорт, СНИЛС, аттестат/диплом, результаты ЕГЭ, заявление (заполняется в вузе) и 2-4 фотографии 3x4. Точный список лучше уточнить на сайте конкретного вуза.",
-            sources: [
-                { title: "Правила приема УрФУ", url: "https://urfu.ru/" }
-            ]
+                "📄 Для поступления обычно нужны: паспорт, СНИЛС, аттестат/диплом, результаты ЕГЭ, заявление (заполняется в вузе) и 2-4 фотографии 3x4. Точный список лучше уточнить на сайте конкретного вуза."
         },
         terms: {
             answer: `
@@ -29,9 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <li>25 июля — завершение приема от поступающих по ЕГЭ</li>
             <li>3-9 августа — издание приказов о зачислении</li>
         </ul>`,
-            sources: [
-                { title: "Информация для абитуриентов", url: "https://urfu.ru/" }
-            ]
         },
 
         scores: {
@@ -46,9 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <li>обществознание — 45</li>
         </ul>
         <p>💡 Для бюджета в топ-вузах баллы намного выше.</p>`,
-            sources: [
-                { title: "Правила приема УрФУ", url: "https://urfu.ru/" }
-            ]
         },
 
         choose: {
@@ -61,9 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <li>наличие бюджетных мест</li>
             <li>расположение и инфраструктуру</li>
         </ol>`,
-            sources: [
-                { title: "Образовательные программы УрФУ", url: "https://urfu.ru/" }
-            ]
         },
 
         benefits: {
@@ -76,9 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <li>ветеранов боевых действий</li>
         </ul>
         <p>Также есть квота для детей участников СВО.</p>`,
-            sources: [
-                { title: "Правила приема УрФУ", url: "https://urfu.ru/" }
-            ]
         }
     };
 
@@ -99,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         scrollToBottom();
     }
 
-    function addAiMessage(text, sources = []) {
+    function addAiMessage(text) {
         const wrapper = document.createElement("div");
         wrapper.className = "message-wrapper ai";
 
@@ -114,39 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
         wrapper.appendChild(avatar);
         wrapper.appendChild(bubble);
         chatMessages.appendChild(wrapper);
-
-        if (sources.length > 0) {
-            const sourcesWrapper = document.createElement("div");
-            sourcesWrapper.className = "message-wrapper ai";
-
-            const spacer = document.createElement("div");
-            spacer.className = "ai-avatar-message";
-            spacer.style.visibility = "hidden";
-
-            const sourcesBubble = document.createElement("div");
-            sourcesBubble.className = "message-bubble ai-bubble";
-
-            const title = document.createElement("div");
-            title.style.fontWeight = "600";
-            title.style.marginBottom = "8px";
-            title.textContent = "Источники:";
-            sourcesBubble.appendChild(title);
-
-            sources.forEach(source => {
-                const link = document.createElement("a");
-                link.href = source.url;
-                link.textContent = source.title || source.url;
-                link.target = "_blank";
-                link.rel = "noopener noreferrer";
-                link.style.display = "block";
-                link.style.marginBottom = "6px";
-                sourcesBubble.appendChild(link);
-            });
-
-            sourcesWrapper.appendChild(spacer);
-            sourcesWrapper.appendChild(sourcesBubble);
-            chatMessages.appendChild(sourcesWrapper);
-        }
 
         scrollToBottom();
     }
@@ -231,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
             addTypingIndicator();
             setTimeout(() => {
                 removeTypingIndicator();
-                addAiMessage(prepared.answer, prepared.sources || []);
+                addAiMessage(prepared.answer);
                 sendButton.disabled = false;
                 userInput.focus();
             }, 500);
@@ -259,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            addAiMessage(data.answer || "Нет ответа", data.sources || []);
+            addAiMessage(data.answer || "Нет ответа");
         } catch (error) {
             removeTypingIndicator();
             addAiMessage("Не удалось подключиться к серверу.");
