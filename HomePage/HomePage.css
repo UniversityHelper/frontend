@@ -133,11 +133,11 @@ body {
 }
         
 .image1 {
-    height: 26%;
-    width: 26%;
+    height: 30%;
+    width: 30%;
     text-align: center;
-    transform: translateX(-350px) translateY(0px);
-    margin: 75px 0 5px 0;
+    transform: translateX(-300px) translateY(0px);
+    margin: 30px 0 5px 0;
 }
 
         /*.header h1 {
