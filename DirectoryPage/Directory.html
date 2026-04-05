@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniHelper — Справочник</title>
+    <link rel="stylesheet" href="Directory.css">
+</head>
+<body>
+<header class="header">
+    <div class="header-content">
+        <h1>Университеты и специальности</h1>
+        <p id="results-count">Поиск данных...</p>
+    </div>
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <div class="filter-card">
+            <h3>Поиск и фильтры</h3>
+
+            <div class="filter-group">
+                <label for="filter-city">Город</label>
+                <select id="filter-city">
+                    <option value="">Все города</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-uni">Университет</label>
+                <select id="filter-uni">
+                    <option value="">Все ВУЗы</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-profile">Направление (профиль)</label>
+                <select id="filter-profile">
+                    <option value="">Все профили</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-score">Макс. балл ЕГЭ (до)</label>
+                <input type="number" id="filter-score" placeholder="Напр: 270">
+            </div>
+
+            <div class="filter-group">
+                <label for="sort-score">Сортировка</label>
+                <select id="sort-score">
+                    <option value="desc">Сначала высокие баллы</option>
+                    <option value="asc">Сначала низкие баллы</option>
+                </select>
+            </div>
+        </div>
+    </aside>
+
+    <main class="content">
+        <div class="list-header">
+            <div class="col-main">Специальность / ВУЗ</div>
+            <div class="col-score">Балл</div>
+            <div class="col-places">Места</div>
+        </div>
+        <div id="list-container"></div>
+    </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
