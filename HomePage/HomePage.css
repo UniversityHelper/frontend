@@ -5,13 +5,18 @@
 }
 
 :root {
-    --primary: #2563eb;        /* чистый синий, не использую */
+    --primary: #2563eb;
+    /* чистый синий, не использую */
     --primary-light: #3b82f6;
-    --primary-soft: #dbeafe;   /* очень светлый фон для акцентов */
-    --bg-page: #f8fafc;        /* светло-серый с холодным отливом */
+    --primary-soft: #dbeafe;
+    /* очень светлый фон для акцентов */
+    --bg-page: #f8fafc;
+    /* светло-серый с холодным отливом */
     --surface: #ffffff;
-    --text-dark: #0f172a;       /* основной текст */
-    --text-soft: #334155;       /* второстепенный текст */
+    --text-dark: #0f172a;
+    /* основной текст */
+    --text-soft: #334155;
+    /* второстепенный текст */
     --border-light: #e2e8f0;
     --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
     --shadow-input: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -29,15 +34,14 @@ body {
     flex-direction: column;
     padding: 20px 20px 32px 20px;
     margin: 0;
-    /* linear-gradient(145deg,#f9fcff 0%,#f1f6fd 100%)*/
     background: #FFFFFF;
     position: relative;
     overflow-x: hidden;
 }
 
-        /* основной контейнер скругленныый */
+/* основной контейнер скругленныый */
 .landing-wrapper {
-    max-width: 1200px;
+    max-width: 1200px; /*2100*/
     width: 100%;
     margin: 0 auto;
     flex: 1;
@@ -46,92 +50,69 @@ body {
 }
 
 .uni-title {
-    position:absolute;
-    top:60px;
-    left:55%;
-    transform:translateX(-5%);
-    text-align:left;
+    position: absolute;
+    top: 60px;
+    left: 55%;
+    transform: translateX(-5%);
+    text-align: left;
 }
 
 .uni-title h1 {
-    font-size:64px;
-    font-weight:700;
-    color:#42454F;
+    font-size: 64px;
+    font-weight: 700;
+    color: #42454F;
 }
 
 .slogan {
-    font-size:24px;
-    color: #8A9AAB; /* 555  #98B0C5 */
-    margin-top:5px;
+    font-size: 24px;
+    color: #8A9AAB;
+    /* 555  #98B0C5 */
+    margin-top: 5px;
     margin-left: 10px;
 }
 
-/*конпка*/
+/*конпка перехода в чат-бот*/
 .chat-button {
-    margin-top:100px;
+    margin-top: 100px;
     margin-left: 20px;
-    display:inline-block;
-    background:#FEEFD3; /*#3b82f6; */
+    display: inline-block;
+    background: #FEEFD3;
+    /*#3b82f6; */
     color: black;
-    font-size:20px;
-    padding:16px 34px;
-    border-radius:40px;
-    text-decoration:none;
-    font-weight:500;
-    transition:all 0.25s ease;
-    position:relative;
-    overflow:hidden;
+    font-size: 20px;
+    padding: 16px 34px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .chat-button:hover {
-    background:  #CBE4F9; /*#2563eb; #BDE8EF  #CBE4F9*/
+    background: #CBE4F9;
+    /*#2563eb; #BDE8EF  #CBE4F9*/
 }
 
 .chat-button span {
-    position:absolute;
-    background:rgba(255,255,255,0.4);
-    border-radius:50%;
-    transform:scale(0);
-    animation:ripple 0.6s linear;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
 }
 
 @keyframes ripple {
     to {
-        transform:scale(4);
-        opacity:0;
+        transform: scale(4);
+        opacity: 0;
     }
 }
-
-
-        /* шапка */
-        /*.header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            padding: 0.5rem 0;
-        }*/
-        
-         /*логотип*/
-        /*.title-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            transform: translateX(35px);
-        }*/
-
-        /*.header .slogan {
-            font-size: clamp(1.1rem, 4vw, 1.5rem);
-            font-weight: 400;
-            color: var(--text-soft);
-            margin-top: 0.25rem;
-            border-bottom: 2px solid transparent; 
-            transform: translateX(15px);
-        } */
 
 .center-image {
     text-align: center;
 }
-        
+
 .image1 {
     height: 30%;
     width: 30%;
@@ -140,23 +121,12 @@ body {
     margin: 30px 0 5px 0;
 }
 
-        /*.header h1 {
-            font-size: clamp(2.8rem, 12vw, 4.2rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--text-dark);
-            line-height: 1.1;
-        }*/
-
-
-        /* основной блок с описанием */
 .hero {
     padding: 2.5rem 2rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     margin-bottom: 3rem;
-    border: 1px solid rgba(255,255,255,0.6);
-    /* f2eeee #EFEBEB #f4f0f0 rgba(255,255,255,0.8); #DBD9DA */
+    border: 1px solid rgba(255, 255, 255, 0.6);
     background: #f3efef;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
@@ -168,7 +138,8 @@ body {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1.5rem;
-    color: #a9c9e8; /* 42454F; #4A90E2;*/
+    color: #a9c9e8;
+    /* 42454F; #4A90E2;*/
     max-width: 900px;
 }
 
@@ -179,19 +150,16 @@ body {
     color: #555;
 }
 
-        /* выделенный цветом текст в основном блоке информации */
+/* выделенный цветом текст в основном блоке информации */
 .accent-uni {
     font-weight: 600;
     color: #4A90E2;
 }
 
-       /* .hero p:last-of-type {
-            margin-bottom: 0;
-        }*/
-
-        /* голубая плашка с акцентом на достоверность */
+/* голубая плашка с акцентом на достоверность */
 .trust-badge {
-    background-color: #ddebfc; /* var(--primary-soft) */
+    background-color: #ddebfc;
+    /* var(--primary-soft) */
     padding: 0.8rem 1.2rem;
     border-radius: 60px;
     display: inline-block;
@@ -211,7 +179,7 @@ body {
     fill: currentColor;
 }
 
-.university-scene {
+/*.university-scene { /*тут что-то поменяли  подозрительно стало чет не то вернуться позже к картинкам
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -292,31 +260,402 @@ body {
     --rz: -9deg;
     animation-delay: 1.6s;
     z-index: 3;
-}
+} */
 
 @keyframes floatCard {
     0% {
         transform:
-                translateY(0px)
-                translateZ(var(--z))
-                rotateY(var(--ry))
-                rotateX(var(--rx))
-                rotateZ(var(--rz));
+            translateY(0px) translateZ(var(--z)) rotateY(var(--ry)) rotateX(var(--rx)) rotateZ(var(--rz));
     }
+
     50% {
         transform:
-                translateY(-14px)
-                translateZ(var(--z))
-                rotateY(calc(var(--ry) + 2deg))
-                rotateX(calc(var(--rx) + 1deg))
-                rotateZ(calc(var(--rz) + 1deg));
+            translateY(-14px) translateZ(var(--z)) rotateY(calc(var(--ry) + 2deg)) rotateX(calc(var(--rx) + 1deg)) rotateZ(calc(var(--rz) + 1deg));
     }
+
     100% {
         transform:
-                translateY(0px)
-                translateZ(var(--z))
-                rotateY(var(--ry))
-                rotateX(var(--rx))
-                rotateZ(var(--rz));
+            translateY(0px) translateZ(var(--z)) rotateY(var(--ry)) rotateX(var(--rx)) rotateZ(var(--rz));
     }
+}
+
+@media (max-width: 768px) {
+    .university_scene {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero {
+        padding: 1.8rem 1.5rem;
+    }
+
+    .uni-title h1 {
+        font-size: 48px;
+    }
+
+    .slogan {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 16px;
+    }
+
+    .uni-title h1 {
+        font-size: 36px;
+    }
+
+    .slogan {
+        font-size: 18px;
+    }
+
+    .chat-button {
+        font-size: 18px;
+        padding: 12px 28px;
+        margin-top: 20px;
+    }
+
+    .hero {
+        padding: 1.2rem;
+        border-radius: 24px;
+    }
+
+    .hero h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .trust-badge {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .image1 {
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .uni-title h1 {
+        font-size: 28px;
+    }
+
+    .slogan {
+        font-size: 16px;
+    }
+
+    .chat-button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .hero h2 {
+        font-size: 1.4rem;
+    }
+}
+
+.hero-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+    margin-top: 60px;
+}
+
+
+
+/* ТЕКСТ */
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    /*отступ между заголовком и слоганом*/
+}
+
+.hero-text h1 {
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #42454F;
+}
+
+.slogan {
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: #64748b;
+}
+
+.chat-button {
+    width: fit-content;
+    margin-top: 20px;
+    padding: 14px 28px;
+    font-size: clamp(16px, 2vw, 18px);
+    border-radius: 999px;
+    background: linear-gradient(135deg, #fde68a, #fca5a5);
+    background: #FEEFD3;
+    transition: all 0.3s ease;
+}
+
+.chat-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Картинка лого */
+.hero-image {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+}
+
+.hero {
+    margin-top: 10px;
+    /*отступ между картинкой и тексто**/
+}
+
+@media (max-width: 1024px) {
+    .hero-top {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-top {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-text {
+        align-items: center;
+    }
+
+    .chat-button {
+        margin: 20px auto 0;
+    }
+
+    .hero-image img {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 32px;
+    }
+}
+
+.hero-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+    margin-top: 50px;
+} 
+
+/* картинка слева */
+.hero-image {
+    order: 1;
+}
+
+/* заголовок справа от картинки*/
+.hero-text {
+    order: 2;
+} 
+
+
+.hero-top {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero p {
+    text-align: justify;
+    hyphens: auto;
+}
+
+
+.hero-image img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .hero-top {
+        grid-template-columns: 1fr;
+        /* одна колонка */
+        gap: 30px;
+    }
+
+
+
+    /* МЕНЯЕМ ПОРЯДОК */
+
+    .hero-text {
+        order: 1;
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero-btn {
+        order: 3;
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero-image {
+        order: 2;
+    } 
+}
+
+@media (max-width: 768px) {
+
+    .hero-text h1 {
+        font-size: 32px;
+    }
+
+    .slogan {
+        font-size: 18px;
+    }
+
+    .chat-button {
+        width: 100%;
+        text-align: center;
+        padding: 16px;
+        font-size: 16px;
+    }
+}
+
+.hero-image img {
+    width: 70%;
+    height: 70%;
+    min-width: 220px;
+}
+
+/* одинаковые кнопки */
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hero-text .chat-button {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+}
+
+/* ripple */
+.chat-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-button span {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* мобильный порядок */
+@media (max-width: 768px) {
+
+    .hero-top {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-text {
+        order: 1;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-image {
+        order: 3;
+    }
+
+    .hero {
+        order: 4;
+    }
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+
+    .hero-top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* порядок элементов */
+    .hero-text h1 {
+        order: 1;
+    }
+
+    .hero-text .slogan {
+        order: 2;
+    }
+
+    .hero-image {
+        order: 3;
+    }
+
+    .hero-text .chat-button:nth-of-type(1) {
+        order: 4;
+    }
+
+    .hero-text .chat-button:nth-of-type(2) {
+        order: 5;
+    }
+
+    .hero {
+        order: 6;
+    }
+
+}
+
+
+.hero-text .chat-button {
+    margin-top: 0;
+}
+
+.hero-text {
+    gap: 6px;
+}
+
+.hero-text .chat-button + .chat-button {
+    margin-top: 10px;
+}
+
+.hero-text h1 {
+    margin-top: -10px;
+}
+
+.hero-text .slogan {
+    margin-top: -4px;
 }
