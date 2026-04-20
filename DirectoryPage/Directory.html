@@ -2,54 +2,70 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniHelper — Справочник</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>UniHelper — Справочник специальностей</title>
     <link rel="stylesheet" href="Directory.css">
 </head>
 <body>
+
+
+<div class="decor-books" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="30" y="50" width="40" height="120" rx="4" fill="#CBE4F9" stroke="#4A90E2" stroke-width="1.5"/>
+        <rect x="55" y="40" width="40" height="130" rx="4" fill="#E9F0FE" stroke="#4A90E2" stroke-width="1.5"/>
+        <rect x="80" y="55" width="40" height="115" rx="4" fill="#FEEFD3" stroke="#4A90E2" stroke-width="1.5"/>
+        <rect x="105" y="45" width="35" height="125" rx="4" fill="#CBE4F9" stroke="#4A90E2" stroke-width="1.5"/>
+    </svg>
+</div>
+
 <header class="header">
     <div class="header-content">
-        <h1>Университеты и специальности</h1>
-        <p id="results-count">Поиск данных...</p>
+        <div class="header-left">
+            <h1>UniHelper <span>Справочник</span></h1>
+            <p>🎓 Направления подготовки и проходные баллы</p>
+        </div>
+        <div class="results-badge" id="results-count">
+            🔍 Загрузка...
+        </div>
     </div>
 </header>
 
 <div class="container">
     <aside class="sidebar">
         <div class="filter-card">
-            <h3>Поиск и фильтры</h3>
+            <h3>📊 Фильтры поиска</h3>
 
             <div class="filter-group">
-                <label for="filter-city">Город</label>
+                <label>🏙️ Город</label>
                 <select id="filter-city">
                     <option value="">Все города</option>
                 </select>
             </div>
 
             <div class="filter-group">
-                <label for="filter-uni">Университет</label>
+                <label>🏛️ Университет</label>
                 <select id="filter-uni">
                     <option value="">Все ВУЗы</option>
                 </select>
             </div>
 
             <div class="filter-group">
-                <label for="filter-profile">Направление (профиль)</label>
+                <label>📈 Направление</label>
                 <select id="filter-profile">
                     <option value="">Все профили</option>
                 </select>
             </div>
 
             <div class="filter-group">
-                <label for="filter-score">Макс. балл ЕГЭ (до)</label>
-                <input type="number" id="filter-score" placeholder="Напр: 270">
+                <label>🎯 Макс. балл ЕГЭ (до)</label>
+                <input type="number" id="filter-score" placeholder="Например: 270">
             </div>
 
             <div class="filter-group">
-                <label for="sort-score">Сортировка</label>
+                <label>⬇️ Сортировка</label>
                 <select id="sort-score">
-                    <option value="desc">Сначала высокие баллы</option>
-                    <option value="asc">Сначала низкие баллы</option>
+                    <option value="desc">Сначала высокие баллы ↓</option>
+                    <option value="asc">Сначала низкие баллы ↑</option>
                 </select>
             </div>
         </div>
@@ -57,9 +73,9 @@
 
     <main class="content">
         <div class="list-header">
-            <div class="col-main">Специальность / ВУЗ</div>
-            <div class="col-score">Балл</div>
-            <div class="col-places">Места</div>
+            <div>Специальность / ВУЗ</div>
+            <div style="text-align: center;">Проходной балл</div>
+            <div>Количество мест</div>
         </div>
         <div id="list-container"></div>
     </main>
