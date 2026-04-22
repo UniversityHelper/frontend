@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendButton = document.getElementById("sendButton");
     const hintButtons = document.querySelectorAll(".question-hint");
     const API_URL = "http://localhost:5000/api/chat/message";
-
     const questionToKey = {
         "Какие документы нужны?": "documents",
         "Сроки подачи заявлений": "terms",
@@ -12,6 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
         "Как выбрать вуз?": "choose",
         "Льготы при поступлении": "benefits"
     };
+    let sessionId = sessionStorage.getItem("chatSessionId");
+    if (!sessionId) {
+        sessionId = crypto.randomUUID()
+        sessionStorage.setItem("chatSessionId", sessionId);
+    }
 
     const preparedAnswers = {
         documents: {
@@ -198,7 +202,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ message: message })
+                body: JSON.stringify({
+                    message: message,
+                    sessionId: sessionId
+                })
             });
 
             const data = await response.json();
