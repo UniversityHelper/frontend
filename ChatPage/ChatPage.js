@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendButton = document.getElementById("sendButton");
     const hintButtons = document.querySelectorAll(".question-hint");
     const API_URL = "http://localhost:5000/api/chat/message";
+
     const questionToKey = {
         "Какие документы нужны?": "documents",
         "Сроки подачи заявлений": "terms",
@@ -11,20 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
         "Как выбрать вуз?": "choose",
         "Льготы при поступлении": "benefits"
     };
-    let sessionId = sessionStorage.getItem("chatSessionId");
-    if (!sessionId) {
-        sessionId = crypto.randomUUID()
-        sessionStorage.setItem("chatSessionId", sessionId);
-    }
 
     const preparedAnswers = {
         documents: {
             answer:
-                "📄 Для поступления обычно нужны: паспорт, СНИЛС, аттестат/диплом, результаты ЕГЭ, заявление (заполняется в вузе) и 2-4 фотографии 3x4. Точный список лучше уточнить на сайте конкретного вуза."
+                "Для поступления обычно нужны: паспорт, СНИЛС, аттестат/диплом, результаты ЕГЭ, заявление (заполняется в вузе) и 2-4 фотографии 3x4. Точный список лучше уточнить на сайте конкретного вуза."
         },
         terms: {
             answer: `
-        <p>📅 Приемная кампания обычно стартует 20 июня. Основные этапы:</p>
+        <p>Приемная кампания обычно стартует 20 июня. Основные этапы:</p>
         <ul>
             <li>20 июня — начало приема документов</li>
             <li>25 июля — завершение приема от поступающих по ЕГЭ</li>
@@ -34,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         scores: {
             answer: `
-        <p>📊 Минимальные баллы ЕГЭ для поступления в вузы в 2026 году:</p>
+        <p>Минимальные баллы ЕГЭ для поступления в вузы в 2026 году:</p>
         <ul>
             <li>русский язык — 40</li>
             <li>математика профиль — 40</li>
@@ -43,12 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <li>история, литература, география, биология, химия, иностранные языки — 40</li>
             <li>обществознание — 45</li>
         </ul>
-        <p>💡 Для бюджета в топ-вузах баллы намного выше.</p>`,
+        <p>Для бюджета в топ-вузах баллы намного выше.</p>`,
         },
 
         choose: {
             answer: `
-        <p>🏛 При выборе вуза советую обратить внимание на:</p>
+        <p>При выборе вуза советую обратить внимание на:</p>
         <ol>
             <li>аккредитацию вуза</li>
             <li>проходные баллы прошлых лет</li>
@@ -60,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         benefits: {
             answer: `
-        <p>🎓 Льготы при поступлении есть у:</p>
+        <p>Льготы при поступлении есть у:</p>
         <ul>
             <li>олимпиадников (БВИ)</li>
             <li>инвалидов I и II групп</li>
@@ -96,12 +92,73 @@ document.addEventListener("DOMContentLoaded", () => {
         avatar.className = "ai-avatar-message";
         avatar.innerHTML = `<img src="ai-avatar.png" alt="AI">`;
 
+        // контейнер плашки для оценки
+        const content = document.createElement("div");
+        content.className = "content";
+
         const bubble = document.createElement("div");
         bubble.className = "message-bubble ai-bubble";
         bubble.innerHTML = text;
 
+        // кнопки оценки для метрики
+        const rating = document.createElement("div");
+        rating.className = "rating";
+        rating.innerHTML = `
+            <button class="rate-btn like" title="Хороший ответ">
+                <svg viewBox="0 0 24 24">
+                    <path d="M1 21h4V9H1v12zm6 0h12c1 0 2-.8 2-2l-1-7c0-1-.8-2-2-2h-6l1-5c0-1-1-2-2-2l-5 7v11z"/>
+                </svg>
+            </button>
+
+            <button class="rate-btn dislike" title="Плохой ответ">
+                <svg viewBox="0 0 24 24">
+                    <path d="M23 3h-4v12h4V3zM17 3H5c-1 0-2 .8-2 2l1 7c0 1 .8 2 2 2h6l-1 5c0 1 1 2 2 2l5-7V5c0-1-1-2-2-2z"/>
+                </svg>
+            </button>
+        `; 
+
+
+        rating.addEventListener("click", (e) => {
+        const btn = e.target.closest(".rate-btn");
+        if (!btn) return;
+
+        const isLike = btn.classList.contains("like");
+
+        // по умолчанию снимаем активность у обеих кнопок
+        rating.querySelectorAll(".rate-btn").forEach(b => {
+            b.classList.remove("active");
+        });
+
+        // добавляем активную только ту, которую выбрали
+        btn.classList.add("active");
+
+        console.log(isLike ? "Лайк" : "Дизлайк");
+
+
+        //диалоговое окно фитбека
+        
+        // показываем кнопку с формой обратной связи
+        let existingFeedbackBtn = rating.querySelector(".feedback-trigger");
+
+        if (!existingFeedbackBtn) {
+            const feedbackBtn = document.createElement("button");
+            feedbackBtn.className = "feedback-trigger";
+            feedbackBtn.textContent = "Форма обратной связи";
+
+            feedbackBtn.addEventListener("click", () => {
+                createFeedbackModal(isLike ? "like" : "dislike");
+            });
+
+            rating.appendChild(feedbackBtn);
+        }
+    });
+        
+
+        content.appendChild(bubble);
+        content.appendChild(rating);
+
         wrapper.appendChild(avatar);
-        wrapper.appendChild(bubble);
+        wrapper.appendChild(content);
         chatMessages.appendChild(wrapper);
 
         scrollToBottom();
@@ -202,10 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
-                    message: message,
-                    sessionId: sessionId
-                })
+                body: JSON.stringify({ message: message })
             });
 
             const data = await response.json();
@@ -245,4 +299,71 @@ document.addEventListener("DOMContentLoaded", () => {
             sendMessage(question);
         });
     });
+
+
+    function createFeedbackModal(type) {
+        const isLike = type === "like";
+
+        const modal = document.createElement("div");
+        modal.className = "feedback-modal";
+
+        const card = document.createElement("div");
+        card.className = `feedback-card ${isLike ? "like" : "dislike"}`;
+
+        // avatar
+        const avatar = document.createElement("img");
+        avatar.src = "ai-avatar.png";
+        avatar.className = "feedback-avatar";
+
+        const title = document.createElement("div");
+        title.className = "feedback-title";
+        title.textContent = "Спасибо за оценку!";
+
+        const textarea = document.createElement("textarea");
+        textarea.className = "feedback-input";
+        textarea.placeholder = "При желании здесь можно оставить комментарий";
+
+        const footer = document.createElement("div");
+        footer.className = "feedback-footer";
+
+        const footerText = document.createElement("span");
+        footerText.textContent = "UniHelper AI - твой помощник";
+
+        const button = document.createElement("button");
+        button.className = `feedback-btn ${isLike ? "like-btn" : "dislike-btn"}`;
+        button.textContent = "Отправить";
+
+        // сборка
+        footer.appendChild(footerText);
+        footer.appendChild(button);
+
+        card.appendChild(avatar);
+        card.appendChild(title);
+        card.appendChild(textarea);
+        card.appendChild(footer);
+
+        modal.appendChild(card);
+
+        document.body.appendChild(modal);
+
+        // закрытие по клику вне формы
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+
+        // отправка
+        const btn = modal.querySelector(".feedback-btn");
+        btn.addEventListener("click", () => {
+            const text = modal.querySelector("textarea").value;
+
+            console.log("Feedback:", {
+                type,
+                text
+            });
+
+            modal.remove();
+        });
+    }
 });
