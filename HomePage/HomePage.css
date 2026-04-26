@@ -485,4 +485,29 @@ body {
     flex-direction: column;
 }
 
+/* Картинки университетов*/
+.hero {
+    position: relative;
+}
 
+.uni-images-side {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.uni-images-side img {
+    width: 250px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .uni-images-side {
+        display: none;
+    }
+}
