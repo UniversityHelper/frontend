@@ -486,28 +486,34 @@ body {
 }
 
 /* Картинки университетов*/
-.hero {
-    position: relative;
-}
-
-.uni-images-side {
+.pc-only-images {
     position: absolute;
     right: 40px;
     top: 50%;
     transform: translateY(-50%);
-    display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-.uni-images-side img {
+.pc-only-images img {
     width: 250px;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-@media (max-width: 768px) {
-    .uni-images-side {
+@media (min-width: 1024px) {
+    .pc-only-images {
+        display: flex;
+    }
+}
+
+@media (max-width: 1023px) {
+    .pc-only-images {
         display: none;
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        width: 0;
+        overflow: hidden;
     }
 }
