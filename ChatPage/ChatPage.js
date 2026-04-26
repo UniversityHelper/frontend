@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const userInput = document.getElementById("userInput");
     const sendButton = document.getElementById("sendButton");
     const hintButtons = document.querySelectorAll(".question-hint");
-    const API_URL = "http://localhost:5000/api/chat/message";
+    const API_URL = `${window.API_CONFIG.API_URL}/api/chat/message`;
 
     const questionToKey = {
         "Какие документы нужны?": "documents",

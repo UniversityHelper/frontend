@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-    fetch("http://localhost:5000/api/analytics/impression", {
+    fetch(`${window.API_CONFIG.API_URL}/api/analytics/impression`, {
         method: "POST"
     })
         .catch(err => console.error("Impression error:", err));
@@ -33,7 +33,7 @@ if (chatButton) {
         e.preventDefault(); // block the transition
 
         try {
-            await fetch("http://localhost:5000/api/analytics/click", {
+            await fetch(`${window.API_CONFIG.API_URL}/api/analytics/click`, {
                 method: "POST"
             });
         } catch (error) {
