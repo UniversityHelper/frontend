@@ -4,7 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendButton = document.getElementById("sendButton");
     const hintButtons = document.querySelectorAll(".question-hint");
     const API_URL = `${window.API_CONFIG.API_URL}/api/chat/message`;
-
+    userInput.addEventListener('input', function () {
+        if (/\S/.test(this.value)) {
+            sendButton.classList.add('active');
+        } else {
+            sendButton.classList.remove('active');
+        }
+    });
     const questionToKey = {
         "Какие документы нужны?": "documents",
         "Сроки подачи заявлений": "terms",
@@ -124,6 +130,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const isLike = btn.classList.contains("like");
 
+        const url = isLike 
+            ? 'http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/like'
+            : 'http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/dislike';
+    
+        fetch(url, { method: 'POST' })
+        .then(response => {
+            if (!response.ok) {
+                console.warn(`Ошибка отправки ${isLike ? 'лайка' : 'дизлайка'}:`, response.status);
+            } else {
+                console.log(`${isLike ? 'Лайк' : 'Дизлайк'} отправлен`);
+            }
+        })
+        .catch(err => console.warn('Сетевая ошибка при отправке оценки:', err));
+
+        setTimeout(() => {
+            rating.querySelectorAll(".rate-btn").forEach(b => {
+            b.remove(); // убираем кнопки
+            });
+
+            const feedbackBtn = document.createElement("button");
+            feedbackBtn.className = "feedback-trigger";
+            feedbackBtn.textContent = "Форма обратной связи";
+
+            feedbackBtn.addEventListener("click", () => {
+                createFeedbackModal(isLike ? "like" : "dislike");
+            });
+
+        rating.appendChild(feedbackBtn);
+        }, 800);
+
+
         // по умолчанию снимаем активность у обеих кнопок
         rating.querySelectorAll(".rate-btn").forEach(b => {
             b.classList.remove("active");
@@ -138,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //диалоговое окно фитбека
         
         // показываем кнопку с формой обратной связи
-        let existingFeedbackBtn = rating.querySelector(".feedback-trigger");
+       /* let existingFeedbackBtn = rating.querySelector(".feedback-trigger");
 
         if (!existingFeedbackBtn) {
             const feedbackBtn = document.createElement("button");
@@ -150,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             rating.appendChild(feedbackBtn);
-        }
+        }*/
     });
         
 
@@ -354,16 +391,32 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // отправка
-        const btn = modal.querySelector(".feedback-btn");
-        btn.addEventListener("click", () => {
-            const text = modal.querySelector("textarea").value;
 
-            console.log("Feedback:", {
-                type,
-                text
-            });
+        button.addEventListener("click", async () => {
+            const text = textarea.value;
+
+            try {
+                await fetch("https://script.google.com/macros/s/AKfycbxNCftSIVjDEdCZirkQb6zUMoOn5HoWICh9kAkKSiHchLi3u1e4i1VjP2OSUvxXupqJ/exec", {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        type: type,
+                        text: text
+                    })
+                });
+
+                console.log("Фидбек отправлен");
+
+            } catch (err) {
+                console.error("Ошибка отправки:", err);
+            }
 
             modal.remove();
         });
+
+    
     }
 });
