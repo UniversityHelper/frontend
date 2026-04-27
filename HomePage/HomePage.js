@@ -1,11 +1,10 @@
-/*fetch('http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/impression', {
+fetch('http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/impression', {
     method: 'POST'
 })
 
 fetch('http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/click', {
     method: 'POST'
 })
-*/
 window.addEventListener("load", () => {
     if (!localStorage.getItem('user_tracked')) {
         fetch(`${window.API_CONFIG.API_URL}/api/analytics/track-user`, {
