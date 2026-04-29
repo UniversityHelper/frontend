@@ -90,9 +90,10 @@ document.addEventListener("DOMContentLoaded", () => {
         scrollToBottom();
     }
 
-    function addAiMessage(text) {
+    function addAiMessage(text, modelResponse) {
         const wrapper = document.createElement("div");
         wrapper.className = "message-wrapper ai";
+        wrapper.dataset.response = modelResponse;
 
         const avatar = document.createElement("div");
         avatar.className = "ai-avatar-message";
@@ -123,72 +124,76 @@ document.addEventListener("DOMContentLoaded", () => {
             </button>
         `; 
 
-
+        rating.dataset.rated = "false";
         rating.addEventListener("click", (e) => {
-        const btn = e.target.closest(".rate-btn");
-        if (!btn) return;
+            if (rating.dataset.rated === "true") return;
+            const btn = e.target.closest(".rate-btn");
+            if (!btn) return;
+            rating.dataset.rated = "true";
+            const messageWrapper = btn.closest(".message-wrapper");
+            const response = messageWrapper?.dataset?.response || "";
 
-        const isLike = btn.classList.contains("like");
+            const isLike = btn.classList.contains("like");
 
-        const url = isLike 
-            ? 'http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/like'
-            : 'http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/dislike';
+            const url = isLike 
+                ? 'http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/like'
+                : 'http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/dislike';
     
-        fetch(url, { method: 'POST' })
-        .then(response => {
-            if (!response.ok) {
-                console.warn(`Ошибка отправки ${isLike ? 'лайка' : 'дизлайка'}:`, response.status);
-            } else {
-                console.log(`${isLike ? 'Лайк' : 'Дизлайк'} отправлен`);
-            }
-        })
-        .catch(err => console.warn('Сетевая ошибка при отправке оценки:', err));
+            fetch(url, { method: 'POST' })
+            .then(response => {
+                if (!response.ok) {
+                    console.warn(`Ошибка отправки ${isLike ? 'лайка' : 'дизлайка'}:`, response.status);
+                } else {
+                    console.log(`${isLike ? 'Лайк' : 'Дизлайк'} отправлен`);
+                }
+            })
+            .catch(err => console.warn('Сетевая ошибка при отправке оценки:', err));
 
-        setTimeout(() => {
-            rating.querySelectorAll(".rate-btn").forEach(b => {
-            b.remove(); // убираем кнопки
-            });
+            setTimeout(() => {
+                rating.querySelectorAll(".rate-btn").forEach(b => {
+                b.remove(); // убираем кнопки
+                });
 
-            const feedbackBtn = document.createElement("button");
-            feedbackBtn.className = "feedback-trigger";
-            feedbackBtn.textContent = "Форма обратной связи";
+                const feedbackBtn = document.createElement("button");
+                feedbackBtn.className = "feedback-trigger";
+                feedbackBtn.textContent = "Форма обратной связи";
 
-            feedbackBtn.addEventListener("click", () => {
-                createFeedbackModal(isLike ? "like" : "dislike");
-            });
-
-        rating.appendChild(feedbackBtn);
-        }, 800);
-
-
-        // по умолчанию снимаем активность у обеих кнопок
-        rating.querySelectorAll(".rate-btn").forEach(b => {
-            b.classList.remove("active");
-        });
-
-        // добавляем активную только ту, которую выбрали
-        btn.classList.add("active");
-
-        console.log(isLike ? "Лайк" : "Дизлайк");
-
-
-        //диалоговое окно фитбека
-        
-        // показываем кнопку с формой обратной связи
-       /* let existingFeedbackBtn = rating.querySelector(".feedback-trigger");
-
-        if (!existingFeedbackBtn) {
-            const feedbackBtn = document.createElement("button");
-            feedbackBtn.className = "feedback-trigger";
-            feedbackBtn.textContent = "Форма обратной связи";
-
-            feedbackBtn.addEventListener("click", () => {
-                createFeedbackModal(isLike ? "like" : "dislike");
-            });
+                feedbackBtn.addEventListener("click", () => {
+                    createFeedbackModal(isLike ? "like" : "dislike", response);
+                });
 
             rating.appendChild(feedbackBtn);
-        }*/
-    });
+            }, 800);
+
+
+            // по умолчанию снимаем активность у обеих кнопок
+            rating.querySelectorAll(".rate-btn").forEach(b => {
+            b.classList.remove("active");
+            });
+
+            // добавляем активную только ту, которую выбрали
+            btn.classList.add("active");
+
+            console.log(isLike ? "Лайк" : "Дизлайк");
+
+
+            //диалоговое окно фитбека
+        
+            // показываем кнопку с формой обратной связи
+            /* let existingFeedbackBtn = rating.querySelector(".feedback-trigger");
+
+            if (!existingFeedbackBtn) {
+                const feedbackBtn = document.createElement("button");
+                feedbackBtn.className = "feedback-trigger";
+                feedbackBtn.textContent = "Форма обратной связи";
+
+                feedbackBtn.addEventListener("click", () => {
+                    createFeedbackModal(isLike ? "like" : "dislike");
+                });
+
+                rating.appendChild(feedbackBtn);
+            }*/
+        });
         
 
         content.appendChild(bubble);
@@ -300,6 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             const data = await response.json();
+            console.log(data);
             removeTypingIndicator();
 
             if (!response.ok) {
@@ -309,7 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            addAiMessage(data.answer || "Нет ответа");
+            addAiMessage(data.answer || "Нет ответа", data.answer);
         } catch (error) {
             removeTypingIndicator();
             addAiMessage("Не удалось подключиться к серверу.");
@@ -338,7 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    function createFeedbackModal(type) {
+    function createFeedbackModal(type, modelResponse) {
         const isLike = type === "like";
 
         const modal = document.createElement("div");
@@ -391,9 +397,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // отправка
-
         button.addEventListener("click", async () => {
             const text = textarea.value;
+
+            const modelResponseToSend = modelResponse;
+
+            console.log("Отправляем:", {
+                type: type,
+                text: text,
+                modelResponse: modelResponseToSend
+            });
 
             try {
                 await fetch("https://script.google.com/macros/s/AKfycbxNCftSIVjDEdCZirkQb6zUMoOn5HoWICh9kAkKSiHchLi3u1e4i1VjP2OSUvxXupqJ/exec", {
@@ -404,7 +417,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     body: JSON.stringify({
                         type: type,
-                        text: text
+                        text: text,
+                        modelResponse: modelResponseToSend
                     })
                 });
 
@@ -416,7 +430,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
             modal.remove();
         });
-
-    
     }
 });
