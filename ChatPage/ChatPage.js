@@ -11,6 +11,47 @@ document.addEventListener("DOMContentLoaded", () => {
             sendButton.classList.remove('active');
         }
     });
+
+    function getCookie(name) {
+        const matches = document.cookie.match(
+            new RegExp("(?:^|; )" + name.replace(/([.$?*|{}()[]\\\/+^])/g, '\\$1') + "=([^;]*)")
+        );
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    function setCookie(name, value, days = 365) {
+        const date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+
+        document.cookie = `${name}=${value}; path=/; expires=${date.toUTCString()}`;
+    }
+
+    function trackUserIfNeeded() {
+        const existingUser = getCookie("unihelper_user");
+
+        if (!existingUser) {
+            fetch("http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/track-user", {
+                method: "POST"
+            })
+            .catch(err => console.warn("Ошибка трекинга:", err));
+
+            setCookie("unihelper_user", "1");
+        }
+    }
+
+    function getSessionId() {
+        let sessionId = localStorage.getItem("session_id");
+
+        if (!sessionId) {
+            sessionId = crypto.randomUUID(); // создаем уникальный id
+            localStorage.setItem("session_id", sessionId);
+        }
+
+        return sessionId;
+    }
+
+    trackUserIfNeeded();
+
     const questionToKey = {
         "Какие документы нужны?": "documents",
         "Сроки подачи заявлений": "terms",
@@ -80,7 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function addUserMessage(text) {
         const wrapper = document.createElement("div");
         wrapper.className = "message-wrapper user";
-
         const bubble = document.createElement("div");
         bubble.className = "message-bubble user-bubble";
         bubble.innerText = text;
@@ -129,11 +169,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (rating.dataset.rated === "true") return;
             const btn = e.target.closest(".rate-btn");
             if (!btn) return;
+            const isLike = btn.classList.contains("like");
             rating.dataset.rated = "true";
             const messageWrapper = btn.closest(".message-wrapper");
             const response = messageWrapper?.dataset?.response || "";
 
-            const isLike = btn.classList.contains("like");
+            rating.querySelectorAll(".rate-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
 
             const url = isLike 
                 ? 'http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/like'
@@ -291,6 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 userInput.focus();
             }, 500);
 
+
             return;
         }
 
@@ -301,7 +344,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ message: message })
+                body: JSON.stringify({ 
+                    message: message,
+                    sessionId: getSessionId() 
+                })
             });
 
             const data = await response.json();
@@ -399,9 +445,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // отправка
         button.addEventListener("click", async () => {
             const text = textarea.value;
+            modal.remove();
 
             const modelResponseToSend = modelResponse;
-
             console.log("Отправляем:", {
                 type: type,
                 text: text,
