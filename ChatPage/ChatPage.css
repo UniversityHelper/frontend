@@ -676,6 +676,9 @@ body {
     text-decoration: underline;
 }
 
+.rate-btn {
+  transition: all 0.3s ease;
+}
 
         /* для планшетов */
 @media (min-width: 601px) and (max-width: 1024px) {

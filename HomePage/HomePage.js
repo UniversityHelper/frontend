@@ -1,4 +1,21 @@
+fetch('http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/impression', {
+    method: 'POST'
+})
+
+fetch('http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/click', {
+    method: 'POST'
+})
 window.addEventListener("load", () => {
+    if (!localStorage.getItem('user_tracked')) {
+        fetch(`${window.API_CONFIG.API_URL}/api/analytics/track-user`, {
+            method: "POST"
+        }).then(res => {
+            if (res.ok) {
+                localStorage.setItem('user_tracked', 'true');
+            }
+        });
+    }
+
     fetch(`${window.API_CONFIG.API_URL}/api/analytics/impression`, {
         method: "POST"
     })
@@ -43,3 +60,4 @@ if (chatButton) {
         window.location.href = "../ChatPage/ChatPage.html";
     })
 }
+
