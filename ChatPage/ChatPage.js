@@ -24,10 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
 
         document.cookie = `${name}=${value}; path=/; expires=${date.toUTCString()}`;
+        //console.log(32);
     }
 
     function trackUserIfNeeded() {
         const existingUser = getCookie("unihelper_user");
+        //console.log(3);
 
         if (!existingUser) {
             fetch("http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/track-user", {
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch(err => console.warn("Ошибка трекинга:", err));
 
-            setCookie("unihelper_user", "1");
+            setCookie("unihelper_user", "authorized");
         }
     }
 
@@ -43,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let sessionId = localStorage.getItem("session_id");
 
         if (!sessionId) {
-            sessionId = crypto.randomUUID(); // создаем уникальный id
+            sessionId = "sess_" + Math.random().toString(36).substr(2, 9);
             localStorage.setItem("session_id", sessionId);
         }
 
