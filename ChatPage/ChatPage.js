@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //console.log(3);
 
         if (!existingUser) {
-            fetch("http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/track-user", {
+            fetch(`${window.API_CONFIG.API_URL}/api/analytics/track-user`, {
                 method: "POST"
             })
             .catch(err => console.warn("Ошибка трекинга:", err));
