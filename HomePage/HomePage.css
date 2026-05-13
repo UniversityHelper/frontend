@@ -1055,6 +1055,119 @@ body {
     /*box-shadow: 0 10px 24px rgba(91, 110, 168, 0.14);*/
 }
 
+/* ткт начинается поле с лентой времени в главном контейнере*/
+.admission-timeline-wrapper {
+    position: relative;
+    margin: 2.4rem 0 2.8rem 0;
+    padding: 1.6rem 1.4rem 2rem 1.4rem;
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(248,250,252,0.96));
+    border: 1px solid rgba(226,232,240,0.9);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+/* заголовок в ленте времени */
+.timeline-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.timeline-badge {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4A90E2;
+    box-shadow: 0 0 0 6px rgba(74,144,226,0.12);
+}
+
+/* к */
+.admission-timeline {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+/* линия */
+.timeline-wave {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #cbd5e1,#93c5fd,#cbd5e1);
+    border-radius: 999px;
+    opacity: 0.8;
+}
+
+/* 1 объект на ленте времени */
+.timeline-step {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.timeline-step:hover {
+    transform: translateY(-4px);
+}
+
+/* точки с важными датами*/
+.timeline-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+    border: 4px solid #4A90E2;
+    margin-bottom: 14px;
+    box-shadow: 0 0 0 6px rgba(74,144,226,0.08);
+    transition: all 0.3s ease;
+}
+
+.timeline-step:hover .timeline-dot {
+    transform: scale(1.12);
+}
+
+.active-dot {
+    background: #4A90E2;
+    box-shadow: 0 0 0 8px rgba(74,144,226,0.18), 0 0 20px rgba(74,144,226,0.28);
+}
+
+/* всякий текст */
+.timeline-date {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+}
+
+.timeline-title {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #64748b;
+    max-width: 120px;
+}
+
+.timeline-disclaimer {
+    margin-top: 0.5rem;
+    text-align: left;
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-style: italic;
+    letter-spacing: 0.3px;
+}
+
 /*адаптация вот отсюда*/
 @media (min-width: 1231px) {
     .pc-only-images {
@@ -1307,6 +1420,26 @@ body {
         width: fit-content;
         max-width: 100%;
     }
+
+    .admission-timeline-wrapper {
+        padding: 1.2rem;
+    }
+
+    .timeline-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .timeline-step {
+        gap: 12px;
+    }
+
+    .timeline-date {
+        font-size: 0.9rem;
+    }
+
+    .timeline-title {
+        font-size: 0.84rem;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -1325,5 +1458,37 @@ body {
 
     .hero-top {
         gap: 40px;
+    }
+}
+
+/* адаптация ддля ленты ремени */
+@media (max-width: 900px) {
+
+    .admission-timeline {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .timeline-wave {
+        display: none;
+    }
+
+    .timeline-step {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        gap: 16px;
+
+        text-align: left;
+    }
+
+    .timeline-dot {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .timeline-title {
+        max-width: unset;
     }
 }
