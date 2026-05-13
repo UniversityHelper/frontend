@@ -37,6 +37,7 @@ body {
     background: #FFFFFF;
     position: relative;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 /* основной контейнер скругленныый */
@@ -165,81 +166,6 @@ body {
     fill: currentColor;
 }
 
-@media (max-width: 1024px) {
-    .hero {
-        padding: 1.8rem 1.5rem;
-    }
-
-    .uni-title h1 {
-        font-size: 48px;
-    }
-
-    .slogan {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        padding: 16px;
-    }
-
-    .uni-title h1 {
-        font-size: 36px;
-    }
-
-    .slogan {
-        font-size: 18px;
-    }
-
-    .chat-button {
-        font-size: 18px;
-        padding: 12px 28px;
-        margin-top: 20px;
-    }
-
-    .hero {
-        padding: 1.2rem;
-        border-radius: 24px;
-    }
-
-    .hero h2 {
-        font-size: 1.6rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .trust-badge {
-        font-size: 0.85rem;
-        padding: 0.5rem 1rem;
-    }
-
-    .image1 {
-        margin: 20px auto;
-    }
-}
-
-@media (max-width: 480px) {
-    .uni-title h1 {
-        font-size: 28px;
-    }
-
-    .slogan {
-        font-size: 16px;
-    }
-
-    .chat-button {
-        font-size: 16px;
-        padding: 10px 20px;
-    }
-
-    .hero h2 {
-        font-size: 1.4rem;
-    }
-}
-
 .hero-top {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -301,37 +227,6 @@ body {
     /*отступ между картинкой и тексто**/
 }
 
-@media (max-width: 1024px) {
-    .hero-top {
-        gap: 40px;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-top {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .hero-text {
-        align-items: center;
-    }
-
-    .chat-button {
-        margin: 20px auto 0;
-    }
-
-    .hero-image img {
-        max-width: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-text h1 {
-        font-size: 32px;
-    }
-}
-
 .hero-top {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -368,61 +263,11 @@ body {
     height: auto;
 }
 
-@media (max-width: 768px) {
-    .hero-top {
-        grid-template-columns: 1fr;
-        /* одна колонка */
-        gap: 30px;
-    }
-
-    /* МЕНЯЕМ ПОРЯДОК */
-
-    .hero-text {
-        order: 1;
-        text-align: center;
-        align-items: center;
-    }
-
-    .hero-btn {
-        order: 3;
-        text-align: center;
-        align-items: center;
-    }
-
-    .hero-image {
-        order: 2;
-    } 
-}
-
-@media (max-width: 768px) {
-
-    .hero-text h1 {
-        font-size: 32px;
-    }
-
-    .slogan {
-        font-size: 18px;
-    }
-
-    .chat-button {
-        width: 100%;
-        text-align: center;
-        padding: 16px;
-        font-size: 16px;
-    }
-}
-
 .hero-image img {
     width: 70%;
     height: 70%;
     min-width: 220px;
 }
-
-/*
-.hero-image {
-    display: flex;
-    justify-content: flex-start;
-} */
 
 /* одинаковые кнопки */
 .hero-text {
@@ -458,8 +303,890 @@ body {
     }
 }
 
-/* мобильный порядок */
+.hero-text {
+    display: flex;
+    flex-direction: column;
+}
+
+/*блок карточки с вузами*/
+.university-showcase {
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+.university-showcase-header {
+    margin-bottom: 28px;
+}
+
+.university-showcase-header h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    color: #42454F;
+    margin-bottom: 10px;
+}
+
+.university-showcase-header p {
+    color: #64748b;
+    font-size: 1rem;
+}
+
+.university-card-grid {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.university-preview-card {
+    width: 150px;
+    height: 230px;
+    border-radius: 28px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.university-preview-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+}
+
+.university-preview-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,rgba(0,0,0,0.65),rgba(0,0,0,0.1));
+    display: flex;
+    align-items: flex-end;
+    padding: 18px;
+}
+
+.preview-overlay span {
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/*модальные окошки вузов*/
+.university-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.university-modal-overlay.active {
+    display: flex;
+}
+
+.university-modal {
+    width: min(1200px, 95vw);
+    height: min(88vh, 860px);
+    background: #fffdf9;
+    border-radius: 36px;
+    overflow: hidden;
+    display: none;
+    grid-template-columns: 40% 60%;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+}
+
+.university-modal.active {
+    display: grid;
+}
+
+.modal-left-side {
+    position: relative;
+    border-right: 3px solid #f7eedd;
+    overflow: hidden;
+}
+
+.modal-left-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: sticky;
+    top: 0;
+}
+
+.modal-right-side {
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.modal-right-side h2 {
+    font-size: clamp(30px, 4vw, 42px);
+    line-height: 1.15;
+    margin-bottom: 14px;
+    color: #1e293b;
+}
+
+.modal-subtitle {
+    color: #64748b;
+    font-size: 1rem;
+    margin-bottom: 28px;
+}
+
+.university-site-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto 34px auto;
+    min-width: 220px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.university-site-btn:hover {
+    transform: translateY(-2px);
+}
+
+.urfu-theme-btn {
+    background: #8B5E3C;
+    color: white;
+    border: 1px solid #8B5E3C;
+}
+
+.urfu-theme-btn:hover {
+    background: #FFF3DD;
+    color: black;
+    border: 1px solid #FFF3DD;
+}
+
+.itmo-theme-btn {
+    background: #4C9A5F;
+    color: white;
+}
+
+.itmo-theme-btn:hover {
+    background: #d9f7df;
+    color: #1e293b;
+}
+
+.hse-theme-btn {
+    background: #5676C9;
+    color: white;
+}
+
+.hse-theme-btn:hover {
+    background: #e6ecff;
+    color: #1e293b;
+}
+
+.msu-theme-btn {
+    background: #b5cb82;
+    color: white;
+}
+
+.msu-theme-btn:hover {
+    background: rgba(181, 203, 130, 0.24);
+    color: #1e293b;
+}
+
+.spbu-theme-btn {
+    background: #5B6EA8;
+    color: white;
+}
+
+.spbu-theme-btn:hover {
+    background: #e7eeff;
+    color: #1e293b;
+}
+
+.modal-description {
+    margin-bottom: 32px;
+}
+
+.modal-description p {
+    text-align: justify;
+    color: #475569;
+    margin-bottom: 18px;
+    line-height: 1.8;
+}
+
+.modal-map-container {
+    width: 100%;
+    height: 320px;
+    border-radius: 24px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.modal-map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.modal-footer-note {
+    color: #94a3b8;
+    font-size: 0.92rem;
+    text-align: center;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 50;
+    transition: all 0.25s ease;
+}
+
+.modal-close-btn:hover {
+    transform: rotate(90deg);
+}
+
+/* карточки топ направлений вузов */
+.university-programs-section {
+    margin-bottom: 34px;
+}
+
+.programs-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 14px;
+}
+
+.program-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.program-tag {
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    cursor: default;
+    user-select: none;
+    border: 1px solid transparent;
+}
+
+.program-tag:hover {
+    transform: translateY(-3px);
+}
+
+/* цветовые настройки для каждой карточки*/
+.urfu-tag {
+    background: rgba(139, 94, 60, 0.08);
+    color: #1e293b;
+    border-color: rgba(139, 94, 60, 0.1);
+}
+
+.itmo-tag {
+    background: #E3F4E8;
+    color: #2F6F44;
+    border-color: rgba(47, 111, 68, 0.12);
+}
+
+.hse-tag {
+    background: #E7ECFF;
+    color: #4660A9;
+    border-color: rgba(70, 96, 169, 0.12);
+}
+
+.msu-tag {
+    background: #f0e8e1c2;
+    color: #7B3E4D;
+    border-color: #e6f1c1;
+}
+
+.spbu-tag {
+    background: #E6ECFA;
+    color: #496196;
+    border-color: rgba(73, 97, 150, 0.12);
+}
+
+/* три карточки с общей инфой про каждый вуз в поле*/
+.university-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 34px;
+}
+
+.university-stat-card {
+    padding: 18px 14px;
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    border: 1px solid transparent;
+}
+
+.university-stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.stat-number {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.92rem;
+    color: #64748b;
+    line-height: 1.3;
+}
+
+/* цветовые настройки для каждого вуза */
+.urfu-stat {
+    background: rgba(139, 94, 60, 0.08);
+    border-color: rgba(139, 94, 60, 0.12);
+    background: #f3efef;;
+    border-color: #f3efef;;
+}
+
+.urfu-stat:hover {
+    box-shadow: 0 12px 24px rgba(139, 94, 60, 0.12);
+}
+
+.urfu-stat .stat-number {
+    color: #6B4226;
+}
+
+/* ИТМО */
+.itmo-stat {
+    background: rgba(76, 154, 95, 0.08);
+    border-color: rgba(76, 154, 95, 0.12);
+}
+
+.itmo-stat:hover {
+    box-shadow: 0 12px 24px rgba(76, 154, 95, 0.12);
+}
+
+.itmo-stat .stat-number {
+    color: #2F6F44;
+}
+
+/* вышка */
+.hse-stat {
+    background: rgba(86, 118, 201, 0.08);
+    border-color: rgba(86, 118, 201, 0.12);
+}
+
+.hse-stat:hover {
+    box-shadow: 0 12px 24px rgba(86, 118, 201, 0.12);
+}
+
+.hse-stat .stat-number {
+    color: #4660A9;
+}
+
+/* мгу */
+.msu-stat {
+    background: rgba(140, 74, 91, 0.08);
+    border-color: rgba(140, 74, 91, 0.12);
+}
+
+.msu-stat:hover {
+    box-shadow: 0 12px 24px rgba(140, 74, 91, 0.12);
+}
+
+.msu-stat .stat-number {
+    color: #7B3E4D;
+}
+
+/* спбгу */
+.spbu-stat {
+    background: rgba(91, 110, 168, 0.08);
+    border-color: rgba(91, 110, 168, 0.12);
+}
+
+.spbu-stat:hover {
+    box-shadow: 0 12px 24px rgba(91, 110, 168, 0.12);
+}
+
+.spbu-stat .stat-number {
+    color: #496196;
+}
+
+/* прогресс бар и поле */
+.admission-score-section {
+    margin-bottom: 34px;
+    padding: 22px 24px;
+    border-radius: 28px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.9),
+            rgba(248,250,252,0.95)
+        );
+    border: 1px solid rgba(226,232,240,0.8);
+    box-shadow: 0 10px 30px rgba(15,23,42,0.05);
+}
+
+.score-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.score-header span:first-child {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+.score-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.score-progress-container {
+    width: 100%;
+    height: 16px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 14px;
+}
+
+.score-progress-bar {
+    height: 100%;
+    border-radius: inherit;
+    position: relative;
+    overflow: hidden;
+    animation: scoreFillAnimation 1.4s ease;
+}
+
+.score-progress-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.15),
+            rgba(255,255,255,0.45),
+            rgba(255,255,255,0.15)
+        );
+    animation: shimmerMove 2.5s infinite linear;
+}
+
+.score-description {
+    font-size: 0.94rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* доп  унрикальные цвета для вузов */
+.urfu-score-bar {
+    width: 82%;
+    background:
+        linear-gradient(
+            90deg,
+            #C58A5C,
+            #8B5E3C
+        );
+    box-shadow: 0 0 18px rgba(139,94,60,0.25);
+}
+
+.itmo-score-bar {
+    width: 95%;
+    background:
+        linear-gradient(
+            90deg,
+            #65C77D,
+            #2F8A4B
+        );
+    box-shadow: 0 0 18px rgba(47,138,75,0.25);
+}
+
+.hse-score-bar {
+    width: 91%;
+    background:
+        linear-gradient(
+            90deg,
+            #7E9DFF,
+            #4F67C8
+        );
+    box-shadow: 0 0 18px rgba(79,103,200,0.25);
+}
+
+.msu-score-bar {
+    width: 97%;
+    background:
+        linear-gradient(90deg,
+        #c6d4a5 0%,
+        #a6c364 45%,
+        #9dc66b 100%
+        );
+    box-shadow: 0 0 18px rgba(140,74,91,0.25);
+}
+
+.spbu-score-bar {
+    width: 89%;
+    background:
+        linear-gradient(
+            90deg,
+            #7B90CC,
+            #566CA8
+        );
+    box-shadow: 0 0 18px rgba(86,108,168,0.25);
+}
+
+/* анимации */
+@keyframes scoreFillAnimation {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes shimmerMove {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* блоки с фичами для каждого вуза */
+.university-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 34px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border-radius: 22px;
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        background 0.28s ease;
+    border: 1px solid transparent;
+    backdrop-filter: blur(10px);
+}
+
+.feature-item:hover {
+    transform: translateY(-4px);
+}
+
+.feature-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* цветовые настройки по вузам */
+.urfu-feature {
+    background: rgba(139, 94, 60, 0.08);
+    border-color: rgba(139, 94, 60, 0.1);
+}
+
+.urfu-feature:hover {
+    box-shadow: 0 10px 24px rgba(139, 94, 60, 0.12);
+}
+
+/* итмо */
+.itmo-feature {
+    background: rgba(76, 154, 95, 0.08);
+    border-color: rgba(76, 154, 95, 0.1);
+}
+
+.itmo-feature:hover {
+    box-shadow: 0 10px 24px rgba(76, 154, 95, 0.12);
+}
+
+/* вышка */
+.hse-feature {
+    background: rgba(86, 118, 201, 0.08);
+    border-color: rgba(86, 118, 201, 0.1);
+}
+
+.hse-feature:hover {
+    box-shadow: 0 10px 24px rgba(86, 118, 201, 0.12);
+}
+
+/* мгу */
+.msu-feature {
+    background: rgba(140, 74, 91, 0.08);
+    border-color: rgba(140, 74, 91, 0.1);
+}
+
+.msu-feature:hover {
+    box-shadow: 0 10px 24px rgba(140, 74, 91, 0.12);
+}
+
+/* спбгу */
+.spbu-feature {
+    background: rgba(91, 110, 168, 0.08);
+    border-color: rgba(91, 110, 168, 0.1);
+}
+
+.spbu-feature:hover {
+    box-shadow: 0 10px 24px rgba(91, 110, 168, 0.12);
+}
+
+/* кнопочки внутри поля вузов*/
+.university-buttons-group {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 18px auto 24px auto;
+    flex-wrap: wrap;
+}
+
+.university-buttons-group .university-site-btn {
+    min-width: 220px;
+    min-height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    text-align: center;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition:
+        transform 0.28s ease,
+        background-color 0.28s ease,
+        color 0.28s ease,
+        box-shadow 0.28s ease;
+    text-decoration: none;
+}
+
+/* hover animation */
+.university-buttons-group .university-site-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* кнопочки для ссылок вузов */
+.university-link-btn {
+    background: transparent !important;
+    backdrop-filter: blur(8px);
+}
+
+/* цветовые стили для вузов*/
+.urfu-theme-btn.university-link-btn {
+    border: 1px solid rgba(139, 94, 60, 0.24);
+    color: #895E4D;
+    background: rgba(245, 229, 204, 0.18) !important;
+}
+
+.urfu-theme-btn.university-link-btn:hover {
+    background: rgba(245, 229, 204, 0.4) !important;
+    color: #000;
+    box-shadow: 0 10px 24px rgba(245, 229, 204, 0.18);
+}
+
+.itmo-theme-btn.university-link-btn {
+    border: 1px solid rgba(76, 154, 95, 0.24);
+    color: rgba(112, 186, 129, 1); 
+    background: rgba(76, 154, 95, 0.06) !important;
+}
+
+.itmo-theme-btn.university-link-btn:hover {
+    background: #DDF7E5 !important;
+    color: #000;
+}
+
+.hse-theme-btn.university-link-btn {
+    border: 1px solid rgba(86, 118, 201, 0.24);
+    color: #4660A9;
+    background: rgba(86, 118, 201, 0.06) !important;
+}
+
+.hse-theme-btn.university-link-btn:hover {
+    background: #E7EDFF !important;
+    color: #000;
+}
+
+.msu-theme-btn.university-link-btn {
+    border: #b5cb82;
+    color: #b5cb82;
+    background: rgba(140, 74, 91, 0.06) !important;
+}
+
+.msu-theme-btn.university-link-btn:hover {
+    background:  #f1e1d3c2 !important;
+    color: #000;
+}
+
+.spbu-theme-btn.university-link-btn {
+    border: 1px solid rgba(91, 110, 168, 0.24);
+    color: #496196;
+    background: rgba(91, 110, 168, 0.06) !important;
+}
+
+.spbu-theme-btn.university-link-btn:hover {
+    background: #E7ECFA !important;
+    color: #000;
+    /*box-shadow: 0 10px 24px rgba(91, 110, 168, 0.14);*/
+}
+
+/*адаптация вот отсюда*/
+@media (min-width: 1231px) {
+    .pc-only-images {
+        display: flex;
+    }
+}
+
+@media (max-width: 1230px) {
+    .pc-only-images {
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 980px) {
+
+    .university-modal {
+        grid-template-columns: 1fr;
+        height: 92vh;
+    }
+
+    .modal-left-side {
+        height: 320px;
+        border-right: none;
+        border-bottom: 3px solid #8B5E3C;
+    }
+
+    .modal-right-side {
+        padding: 28px;
+    }
+}
+
 @media (max-width: 768px) {
+
+    body {
+        padding: 16px;
+    }
+
+    .uni-title h1 {
+        font-size: 36px;
+    }
+
+    .slogan {
+        font-size: 18px;
+    }
+
+    .chat-button {
+        font-size: 18px;
+        padding: 12px 28px;
+        margin-top: 20px;
+    }
+
+    .hero {
+        padding: 1.2rem;
+        border-radius: 24px;
+    }
+
+    .hero h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .trust-badge {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .image1 {
+        margin: 20px auto;
+    }
+
+    .hero-top {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-text {
+        align-items: center;
+    }
+
+    .chat-button {
+        margin: 20px auto 0;
+    }
+
+    .hero-image img {
+        max-width: 300px;
+    }
+
+    .hero-top {
+        grid-template-columns: 1fr;
+        /* одна колонка */
+        gap: 30px;
+    }
+
+    /* МЕНЯЕМ ПОРЯДОК */
+    .hero-text {
+        order: 1;
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero-btn {
+        order: 3;
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero-image {
+        order: 2;
+    } 
+
+    .hero-text h1 {
+        font-size: 32px;
+    }
+
+    .slogan {
+        font-size: 18px;
+    }
+
+    .chat-button {
+        width: 100%;
+        text-align: center;
+        padding: 16px;
+        font-size: 16px;
+    }
 
     .hero-top {
         grid-template-columns: 1fr;
@@ -476,45 +1203,130 @@ body {
     }
 
     .hero {
-        order: 4;
+    }
+
+    .university-card-grid {
+        justify-content: center;
+    }
+
+    .university-preview-card {
+        width: 140px;
+        height: 210px;
+    }
+
+    .modal-right-side h2 {
+        font-size: 28px;
+    }
+
+    .modal-map-container {
+        height: 240px;
+    }
+
+    .program-tag {
+        font-size: 0.88rem;
+        padding: 9px 14px;
+    }
+
+    .university-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .university-stat-card {
+        padding: 16px;
+    }
+
+    .admission-score-section {
+        padding: 20px;
+    }
+
+    .score-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .university-features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-item {
+        padding: 15px 16px;
+    }
+
+    .university-buttons-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+    }
+
+    .university-buttons-group .university-site-btn {
+        width: 100%;
+        min-width: unset;
     }
 }
 
-.hero-text {
-    display: flex;
-    flex-direction: column;
-}
+@media (max-width: 480px) {
 
-/* Картинки университетов*/
-.pc-only-images {
-    position: absolute;
-    right: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
+    .uni-title h1 {
+        font-size: 28px;
+    }
 
-.pc-only-images img {
-    width: 250px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
+    .slogan {
+        font-size: 16px;
+    }
 
-@media (min-width: 1231px) {
-    .pc-only-images {
-        display: flex;
+    .chat-button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .hero h2 {
+        font-size: 1.4rem;
+    }
+
+    .hero-text h1 {
+        font-size: 32px;
+    }
+
+    .university-preview-card {
+        width: 100%;
+        max-width: 320px;
+        height: 240px;
+    }
+
+    .modal-right-side {
+        padding: 20px;
+    }
+
+    .university-site-btn {
+        width: 100%;
+    }
+
+    .program-tags-list {
+        gap: 10px;
+    }
+
+    .program-tag {
+        width: fit-content;
+        max-width: 100%;
     }
 }
 
-@media (max-width: 1230px) {
-    .pc-only-images {
-        display: none;
-        visibility: hidden;
-        opacity: 0;
-        height: 0;
-        width: 0;
-        overflow: hidden;
+@media (max-width: 1024px) {
+
+    .hero {
+        padding: 1.8rem 1.5rem;
+    }
+
+    .uni-title h1 {
+        font-size: 48px;
+    }
+
+    .slogan {
+        font-size: 20px;
+    }
+
+    .hero-top {
+        gap: 40px;
     }
 }

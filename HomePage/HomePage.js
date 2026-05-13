@@ -54,3 +54,57 @@ if (chatButton) {
     })
 }
 
+
+/* модальный окошки для вузов */
+const previewCards = document.querySelectorAll('.university-preview-card');
+const universityOverlay = document.getElementById('universityOverlay');
+const universityModals = document.querySelectorAll('.university-modal');
+const closeButtons = document.querySelectorAll('.modal-close-btn');
+
+previewCards.forEach(card => {
+
+    card.addEventListener('click', () => {
+
+        const modalId = card.dataset.modal;
+        const currentModal = document.getElementById(modalId);
+
+        universityOverlay.classList.add('active');
+        currentModal.classList.add('active');
+
+        document.body.style.overflow = 'hidden';
+    });
+
+});
+
+closeButtons.forEach(button => {
+
+    button.addEventListener('click', closeUniversityModal);
+
+});
+
+universityOverlay.addEventListener('click', (e) => {
+
+    if (e.target === universityOverlay) {
+        closeUniversityModal();
+    }
+
+});
+
+function closeUniversityModal() {
+
+    universityOverlay.classList.remove('active');
+
+    universityModals.forEach(modal => {
+        modal.classList.remove('active');
+    });
+
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+
+    if (e.key === 'Escape') {
+        closeUniversityModal();
+    }
+
+});
