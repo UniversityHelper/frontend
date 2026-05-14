@@ -1339,6 +1339,7 @@ body {
 
     .university-stats-grid {
         grid-template-columns: repeat(3, 1fr);
+        max-width: 768px;
     }
 
     .university-stat-card {
