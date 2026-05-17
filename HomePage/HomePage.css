@@ -308,6 +308,32 @@ body {
     flex-direction: column;
 }
 
+/* картинка с совой в основном блоке с описанием */
+.hero-flex {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+/* отделили основной текст вот здесь  */
+.hero-main {
+    flex: 1;
+    min-width: 0;
+}
+
+/* сова */
+.photo-owl {
+    width: 240px;
+    flex-shrink: 0;
+}
+
+.photo-owl img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /*блок карточки с вузами*/
 .university-showcase {
     margin-top: 0px;
@@ -1441,6 +1467,10 @@ body {
     .timeline-title {
         font-size: 0.84rem;
     }
+
+    .photo-owl {
+        width: 180px;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -1491,5 +1521,15 @@ body {
 
     .timeline-title {
         max-width: unset;
+    }
+
+    /*картинка совы*/
+    .hero-flex {
+        flex-direction: column;
+    }
+
+    .photo-owl {
+        width: 220px;
+        margin: 0 auto;
     }
 }
