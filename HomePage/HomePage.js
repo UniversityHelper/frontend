@@ -21,7 +21,10 @@ const buttons = document.querySelectorAll(".chat-button");
 
 buttons.forEach(button => {
     button.addEventListener("click", async (e) => {
-        e.preventDefault();
+        const isExternal = button.href.startsWith('http');
+        if (!isExternal) {
+            e.preventDefault();
+        }
 
         // Ripple effect logic
         let circle = document.createElement("span");
@@ -49,7 +52,78 @@ buttons.forEach(button => {
             console.error("Click error:", error);
         }
 
-        // Navigate after analytics
-        window.location.href = button.href;
+        // Navigate after analytics for internal links
+        if (!isExternal) {
+            window.location.href = button.href;
+        }
     });
 });
+
+/* модальный окошки для вузов */
+const previewCards = document.querySelectorAll('.university-preview-card');
+const universityOverlay = document.getElementById('universityOverlay');
+const universityModals = document.querySelectorAll('.university-modal');
+const closeButtons = document.querySelectorAll('.modal-close-btn');
+
+if (previewCards.length > 0) {
+    previewCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const modalId = card.dataset.modal;
+            const currentModal = document.getElementById(modalId);
+
+            if (universityOverlay && currentModal) {
+                universityOverlay.classList.add('active');
+                currentModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+}
+
+if (closeButtons.length > 0) {
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeUniversityModal);
+    });
+}
+
+if (universityOverlay) {
+    universityOverlay.addEventListener('click', (e) => {
+        if (e.target === universityOverlay) {
+            closeUniversityModal();
+        }
+    });
+}
+
+function closeUniversityModal() {
+    if (universityOverlay) {
+        universityOverlay.classList.remove('active');
+        universityModals.forEach(modal => {
+            modal.classList.remove('active');
+        });
+        document.body.style.overflow = '';
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeUniversityModal();
+    }
+});
+
+/* настройки темной темы - смена картинок*/
+const themeImages = document.querySelectorAll('.theme-image');
+function updateThemeImages() {
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    themeImages.forEach(img => {
+        img.src = isDark
+            ? img.dataset.dark
+            : img.dataset.light;
+    });
+}
+
+if (themeImages.length > 0) {
+    updateThemeImages();
+    window.matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', updateThemeImages);
+}

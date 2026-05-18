@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)">
     <title>UniHelper — твой помощник</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="HomePage.css">
     <script src="../config.js"></script>
 </head>
@@ -27,32 +30,118 @@
             </div>
 
             <div class="hero-image">
-                <img src="image1.png" alt="">
+                <img src="image1.png" 
+                data-light="image1.png"
+                data-dark="image1-dark.png"
+                class="theme-image"
+                alt="лого">
             </div>
         </section>
         
         <!-- Основной блок с описанием сервиса -->
         <section class="hero">
-            <h2>Поступление в УрФУ без лишнего стресса и ошибок — это к нам!</h2>
-            <p>
-                Мы объединили всю необходимую информацию для безупречного приёма в вуз на одном едином сервисе.
-                Наш продукт будет <span class="accent-uni">актуален</span> абитуриентам и их родителям, с нами вы можете быть <span class="accent-uni">уверены</span> в каждом шаге.
-                Максимум пользы с <span class="accent-uni">экономией</span> вашего времени. Будьте спокойны за свои результаты!
-            </p>
-            <p>
-                Ключевая <span class="accent-uni">фишка</span> нашей платформы — чат с умным <strong>AI-агентом</strong>, готовым ответить на все ваши вопросы, связанные с поступлением.
-            </p>
-            <p>
-                <span style="display: inline-flex; align-items: center; gap: 4px; background: #eef2ff; padding: 0.2rem 0.8rem; border-radius: 30px;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                    <strong>100% надежно:</strong>
-                </span>
-                AI-агент использует базу данных, содержащую <strong>только проверенные документы с официальных источников</strong>.
-                Благодаря этому вы можете быть полностью уверены в полученных ответах: они всегда будут <span class="accent-uni">точными</span> и <span class="accent-uni">достоверными</span>.
-            </p>
-            <!-- Блок с доверительной плашкой -->
+            <h2>Поступление без лишнего стресса и ошибок — это к нам!</h2>
+            
+            <div class="admission-timeline-wrapper">
+                <div class="timeline-header">
+                    <span>Актуальные сроки поступления 2026</span>
+                </div>
+                <div class="admission-timeline">
+                    <div class="timeline-wave"></div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">20 июня</div>
+                        <div class="timeline-title">Старт приёма</div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">~10 июля</div>
+                        <div class="timeline-title">Конец приёма (ДВИ)</div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">~15-22 июля</div>
+                        <div class="timeline-title">Проведение ВИ/ДВИ</div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">~25 июля</div>
+                        <div class="timeline-title">Конец приёма (ЕГЭ/БВИ)</div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">~27 июля</div>
+                        <div class="timeline-title">Конкурсные списки</div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">~3-4 августа</div>
+                        <div class="timeline-title">Приоритетное зачисление (бюджет)</div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">~8-10 августа</div>
+                        <div class="timeline-title">Основное зачисление (бюджет)</div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">~20 августа</div>
+                        <div class="timeline-title">Конец приёма (контракт)</div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="timeline-dot active-dot"></div>
+                        <div class="timeline-date">Август-сентябрь</div>
+                        <div class="timeline-title">Зачисление (контракт)</div>
+                    </div>
+                </div>
+
+                <div class="timeline-disclaimer">
+                    *Более точные сроки уточняйте на сайте конкретного вуза
+                </div>
+            </div>
+
+            <div class="hero-flex">
+                <div class="hero-main">
+                    <p>
+                        Мы объединили всю необходимую информацию для безупречного приёма в вуз на одном едином сервисе.
+                        Наш продукт будет <span class="accent-uni">актуален</span> абитуриентам и их родителям, с нами вы можете быть <span class="accent-uni">уверены</span> в каждом шаге.
+                        Максимум пользы с <span class="accent-uni">экономией</span> вашего времени. Будьте спокойны за свои результаты!
+                    </p>
+
+                    <p>
+                        Ключевая <span class="accent-uni">фишка</span> нашей платформы — чат с умным <strong>AI-агентом</strong>, готовым ответить на все ваши вопросы, связанные с поступлением.
+                    </p>
+
+                    <p class="reliable-block">
+                        <span class="badge">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            <strong>100% надежно:</strong>
+                        </span>
+                        AI-агент использует базу данных, содержащую <strong>только проверенные документы с официальных источников</strong>.
+                        Благодаря этому вы можете быть полностью уверены в полученных ответах: они всегда будут <span class="accent-uni">точными</span> и <span class="accent-uni">достоверными</span>.
+                    </p>
+                </div>
+
+                <div class="photo-owl">
+                    <img src="owl-logo.png" 
+                    data-light="owl-logo.png"
+                    data-dark="owl-dark.png"
+                    class="theme-image"
+                    alt="совушка">
+                </div>
+            </div>
+            
+            <!-- Доверительная плашка -->
             <div class="trust-badge">
                 <svg viewBox="0 0 24 24" width="18" height="18" style="display: inline; margin-right: 6px;">
                     <path d="M12 2L2 7v7c0 5 10 8 10 8s10-3 10-8V7l-10-5z" />
@@ -60,11 +149,630 @@
                 </svg>
                 Основано на данных Министерства образования и открытых ресурсах вузов
             </div>
-            <div class="pc-only-images">
-            <img src="urfu2.jpg" alt="МГУ">
-            <img src="urfu.jpg" alt="УрФУ">
-        </div>
         </section>
+
+        <!-- Блок с вузами -->
+        <section class="university-showcase">
+            <div class="university-showcase-header">
+                <h2>Рейтинговые университеты</h2>
+                <p>Познакомьтесь с ведущими вузами России и получите подробную информацию о каждом из них!</p>
+            </div>
+
+            <div class="university-card-grid">
+                <!-- ИТМО -->
+                <div class="university-preview-card"
+                    data-modal="itmoModal">
+                    <img src="images/itmo-preview.jpg" alt="ИТМО">
+                    <div class="preview-overlay">
+                        <span>ИТМО</span>
+                    </div>
+                </div>
+
+                <!-- СПбГУ -->
+                <div class="university-preview-card"
+                    data-modal="spbuModal">
+                    <img src="images/spbgu-preview.jpg" alt="СПбГУ">
+                    <div class="preview-overlay">
+                        <span>СПбГУ</span>
+                    </div>
+                </div>
+
+                <!-- МГУ -->
+                <div class="university-preview-card"
+                    data-modal="msuModal">
+                    <img src="images/msu-preview.jpg" alt="МГУ">
+                    <div class="preview-overlay">
+                        <span>МГУ</span>
+                    </div>
+                </div>
+
+                <!-- ВШЭ -->
+                <div class="university-preview-card"
+                    data-modal="hseModal">
+                    <img src="images/hse-preview.jpg" alt="ВШЭ">
+                    <div class="preview-overlay">
+                        <span>НИУ ВШЭ</span>
+                    </div>
+                </div>
+
+                <!-- УрФУ -->
+                <div class="university-preview-card"
+                    data-modal="urfuModal">
+                    <img src="images/urfu-preview.jpg" alt="УрФУ">
+                        <div class="preview-overlay">
+                        <span>УрФУ</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- модальные окошки вузов -->
+        <div class="university-modal-overlay" id="universityOverlay">
+
+            <!-- URFU -->
+            <div class="university-modal" id="urfuModal">
+                <button class="modal-close-btn">&times;</button>
+                <div class="modal-left-side">
+                        <img src="images/urfu-modal.jpg" 
+                        
+                        alt="УрФУ">
+                </div>
+                <div class="modal-right-side">
+                    <h2>УрФУ им. первого Президента России Б. Н. Ельцина</h2>
+                    <div class="modal-subtitle">
+                        Екатеринбург • Один из крупнейших вузов России на Урале
+                    </div>
+
+                    <div class="university-buttons-group">
+                        <a href="../ChatPage/ChatPage.html"
+                        class="university-site-btn urfu-theme-btn">
+                        Спросить UniHelper AI
+                        </a>
+                        <a href="https://urfu.ru" 
+                        target="_blank" 
+                        class="university-site-btn urfu-theme-btn university-link-btn">
+                        Перейти на сайт вуза</a>
+                    </div>
+
+                    <div class="university-stats-grid">
+                        <div class="university-stat-card urfu-stat">
+                            <div class="stat-number">45 000+</div>
+                            <div class="stat-label">студентов</div>
+                        </div>
+                        <div class="university-stat-card urfu-stat">
+                            <div class="stat-number">400+</div>
+                            <div class="stat-label">программ</div>
+                        </div>
+                        <div class="university-stat-card urfu-stat">
+                            <div class="stat-number">120+</div>
+                            <div class="stat-label">партнеров</div>
+                        </div>
+                    </div>
+
+                    <div class="admission-score-section">
+                        <div class="score-header">
+                            <span>Средний проходной балл на бюджет</span>
+                            <span class="score-value">230 / 310</span>
+                        </div>
+                        <div class="score-progress-container">
+                            <div class="score-progress-bar urfu-score-bar"></div>
+                        </div>
+                        <div class="score-description">
+                            Высокая конкуренция на технические направления
+                        </div>
+                    </div>
+
+                    <div class="university-programs-section">
+                        <div class="programs-title">
+                            Популярные направления
+                        </div>
+                        <div class="program-tags-list">
+                            <span class="program-tag urfu-tag">Строительство и архитектура</span>
+                            <span class="program-tag urfu-tag">ФИИТ</span>
+                            <span class="program-tag urfu-tag">Программная инженерия</span>
+                            <span class="program-tag urfu-tag">Ядерная физика и технологии</span>
+                            <span class="program-tag urfu-tag">Менеджмент и мировая экономика</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-description">
+                        <p>
+                            Уральский федеральный университет имени первого Президента России Б. Н. Ельцина —
+                            один из ведущих научно-образовательных центров страны.
+                            Университет объединяет современные образовательные программы,
+                            развитую инфраструктуру и сильную научную базу.
+                        </p>
+
+                        <p>
+                        УрФУ входит в число крупнейших университетов России и активно
+                            сотрудничает с международными организациями и работодателями.
+                            Здесь представлены инженерные, IT, гуманитарные,
+                            экономические и естественно-научные направления.
+                        </p>
+                    </div>
+
+                    <div class="university-features-grid">
+                        <div class="feature-item urfu-feature">
+                            <span class="material-icons feature-icon">apartment</span>
+                            <span>Современные общежития</span>
+                        </div>
+                        <div class="feature-item urfu-feature">
+                            <span class="material-icons feature-icon">military_tech</span>
+                            <span>Военный учебный центр</span>
+                        </div>
+                        <div class="feature-item urfu-feature">
+                            <span class="material-icons feature-icon">public</span>
+                            <span>Международные программы</span>
+                        </div>
+                        <div class="feature-item urfu-feature">
+                            <span class="material-icons feature-icon">devices</span>
+                            <span>Цифровая среда</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-map-container">
+                        <iframe
+                            src="https://www.google.com/maps?q=УрФУ+Екатеринбург&output=embed"
+                            allowfullscreen=""
+                            loading="lazy">
+                        </iframe>
+
+                    </div>
+
+                    <div class="modal-footer-note">
+                        Актуальная информация рекомендуется к уточнению на официальном сайте университета.
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ITMO -->
+            <div class="university-modal" id="itmoModal">
+                <button class="modal-close-btn">&times;</button>
+                <div class="modal-left-side">
+                        <img src="images/itmo-modal.jpg" 
+                        
+                        alt="ИТМО">
+                </div>
+
+                <div class="modal-right-side">
+                    <h2>Университет ИТМО</h2>
+                    <div class="modal-subtitle">
+                        Санкт-Петербург • Лидер IT и технологий
+                    </div>
+                    <div class="university-buttons-group">
+                        <a href="../ChatPage/ChatPage.html"
+                        class="university-site-btn itmo-theme-btn">
+                        Спросить UniHelper AI
+                        </a>
+                        <a href="https://itmo.ru"
+                        target="_blank"
+                        class="university-site-btn itmo-theme-btn university-link-btn">
+                        Перейти на сайт вуза
+                        </a>
+                    </div>
+
+                    <div class="university-stats-grid">
+                        <div class="university-stat-card itmo-stat">
+                            <div class="stat-number">19 000+</div>
+                            <div class="stat-label">студентов</div>
+                        </div>
+                        <div class="university-stat-card itmo-stat">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">лабораторий</div>
+                        </div>
+                        <div class="university-stat-card itmo-stat">
+                            <div class="stat-number">80+</div>
+                            <div class="stat-label">стран</div>
+                        </div>
+                    </div>
+
+                    <div class="admission-score-section">
+                        <div class="score-header">
+                            <span>Средний проходной балл</span>
+                            <span class="score-value">290 / 310</span>
+                        </div>
+                        <div class="score-progress-container">
+                            <div class="score-progress-bar itmo-score-bar"></div>
+                        </div>
+                        <div class="score-description">
+                            Очень высокий конкурс на IT-направления
+                        </div>
+                    </div>
+
+                    <div class="university-programs-section">
+                        <div class="programs-title">
+                            Популярные направления
+                        </div>
+                        <div class="program-tags-list">
+                            <span class="program-tag itmo-tag">Искусственный интеллект</span>
+                            <span class="program-tag itmo-tag">Компьютерные технологии</span>
+                            <span class="program-tag itmo-tag">GameDev</span>
+                            <span class="program-tag itmo-tag">Робототехника</span>
+                            <span class="program-tag itmo-tag">Кибербезопасность</span>
+                            <span class="program-tag itmo-tag">Инфохимия</span>
+                            <span class="program-tag itmo-tag">Новый физтех</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-description">
+                        <p>
+                            ИТМО — один из самых известных технологических университетов России.
+                            Университет является лидером в области IT, программирования, робототехники, искусственного интеллекта и фотоники. Университет входит в топ‑100 мировых рейтингов по компьютерным наукам (например, QS и THE) и не раз становился абсолютным чемпионом мира по программированию (ACM ICPC).
+                        </p>
+                        <p>
+                            Вуз активно участвует в международных исследованиях
+                            и славится сильной подготовкой студентов в области
+                            современных цифровых технологий. Здесь работают собственные научные лаборатории, стартап‑студия, акселератор и первый в России мегагрант по искусственному интеллекту. Выпускники ИТМО востребованы в IT, финтехе, роботостроении и науке, а студенческая жизнь включает десятки клубов, хакатоны и собственный фестиваль «ИТМО.Огонь».
+                        </p>
+                    </div>
+
+                    <div class="university-features-grid">
+                        <div class="feature-item itmo-feature">
+                            <span class="material-icons feature-icon">home</span>
+                            <span>Общежитие</span>
+                        </div>
+                    <div class="feature-item itmo-feature">
+                        <span class="material-icons feature-icon">military_tech</span>
+                        <span>Военный учебный центр</span>
+                    </div>
+                        <div class="feature-item itmo-feature">
+                            <span class="material-icons feature-icon">public</span>
+                            <span>Международные стажировки</span>
+                        </div>
+                        <div class="feature-item itmo-feature">
+                            <span class="material-icons feature-icon">devices</span>
+                            <span>Сильная IT-инфраструктура</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-map-container">
+                        <iframe
+                            src="https://www.google.com/maps?q=ИТМО+Санкт-Петербург&output=embed"
+                            allowfullscreen=""
+                            loading="lazy">
+                        </iframe>
+                    </div>
+
+                    <div class="modal-footer-note">
+                        Университет регулярно входит в рейтинги лучших технических вузов страны.
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- HSE -->
+            <div class="university-modal" id="hseModal">
+                <button class="modal-close-btn">&times;</button>
+
+                <div class="modal-left-side">
+                        <img src="images/hse-modal.jpg" 
+                        
+                        alt="ВШЭ">
+                </div>
+
+                <div class="modal-right-side">
+                    <h2>НИУ ВШЭ</h2>
+                    <div class="modal-subtitle">
+                        Москва • Экономика, аналитика, компьютерные науки, юриспруденция
+                    </div>
+
+                    <div class="university-buttons-group">
+                        <a href="../ChatPage/ChatPage.html"
+                            class="university-site-btn hse-theme-btn">
+                            Спросить UniHelper AI
+                        </a>
+                        <a href="https://www.hse.ru"
+                            target="_blank"
+                            class="university-site-btn hse-theme-btn university-link-btn">
+                            Перейти на сайт вуза
+                        </a>
+                    </div>
+                    
+                    <div class="university-stats-grid">
+                        <div class="university-stat-card hse-stat">
+                            <div class="stat-number">50 000+</div>
+                            <div class="stat-label">студентов</div>
+                        </div>
+                        <div class="university-stat-card hse-stat">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">программ</div>
+                        </div>
+                        <div class="university-stat-card hse-stat">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">партнеров</div>
+                        </div>
+                    </div>
+
+                    <div class="admission-score-section">
+                        <div class="score-header">
+                            <span>Средний проходной балл</span>
+                            <span class="score-value">290 / 310</span>
+                        </div>
+                            <div class="score-progress-container">
+                            <div class="score-progress-bar hse-score-bar"></div>
+                        </div>
+                    <div class="score-description">
+                            Высокие требования на экономические программы
+                        </div>
+                    </div>
+
+                    <div class="university-programs-section">
+                        <div class="programs-title">
+                            Популярные направления
+                        </div>
+                        <div class="program-tags-list">
+                            <span class="program-tag hse-tag">Экономика (совбак)</span>
+                            <span class="program-tag hse-tag">ФКН (ПМИ, ПИ)</span>
+                            <span class="program-tag hse-tag">Юриспруденция</span>
+                            <span class="program-tag hse-tag">Лингвистика</span>
+                            <span class="program-tag hse-tag">Математика</span>
+                            <span class="program-tag hse-tag">Менеджмент</span>
+                            <span class="program-tag hse-tag">Коммуникации и связи с общественностью</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-description">
+                        <p>Высшая школа экономики (ВШЭ) — один из самых престижных университетов России, основанный в 1992 году и быстро занявший лидирующие позиции в национальных и мировых рейтингах (например, топ‑100 по экономике и социологии в QS). Университет известен сильными программами по экономике, аналитике, менеджменту, IT, социальным наукам, а также по новым направлениям — урбанистике, цифровым коммуникациям, когнитивным исследованиям и публичной политике. ВШЭ славится своей экономико-математической школой и ежегодно занимает первое место в России по цитируемости научных работ в области социальных и гуманитарных наук.</p>
+                        <p>ВШЭ активно внедряет современные образовательные технологии: открытый онлайн-образование (более 600 курсов на Coursera и собственном платформе), цифровые кафедры, проектные семинары с реальными кейсами от бизнеса. Университет сотрудничает с ведущими международными вузами (Лондонская школа экономики, Парижский университет, Сеульский национальный университет) и крупными компаниями (Сбер, Яндекс, Газпром, Тинькофф, Ozon). Абитуриентов привлекает не только академическая строгость, но и насыщенная студенческая жизнь: десятки клубов, собственный лицей для школьников, ежегодный фестиваль «Вышка. Парк», КВН, и, конечно, четыре кампуса в Москве, Санкт-Петербурге, Нижнем Новгороде и Перми.</p>
+                    </div>
+
+                    <div class="university-features-grid">
+                        <div class="feature-item hse-feature">
+                            <span class="material-icons feature-icon">home</span>
+                            <span>Общежитие</span>
+                        </div>
+                        <div class="feature-item hse-feature">
+                            <span class="material-icons feature-icon">military_tech</span>
+                            <span>Военный учебный центр</span>
+                        </div>
+                        <div class="feature-item hse-feature">
+                            <span class="material-icons feature-icon">public</span>
+                            <span>Международные программы</span>
+                        </div>
+                        <div class="feature-item hse-feature">
+                            <span class="material-icons feature-icon">co_present</span>
+                            <span>Онлайн-курсы</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-map-container">
+                        <iframe
+                            src="https://www.google.com/maps?q=НИУ+ВШЭ+Москва&output=embed"
+                            allowfullscreen=""
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <div class="modal-footer-note">
+                        Многие образовательные программы ВШЭ реализуются совместно с индустриальными партнерами.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MSU -->
+            <div class="university-modal" id="msuModal">
+                <button class="modal-close-btn">&times;</button>
+                <div class="modal-left-side">
+                    <img src="images/msu-modal.jpg" 
+                   
+                    alt="МГУ">
+                </div>
+                <div class="modal-right-side">
+                    <h2>МГУ им. М. В. Ломоносова</h2>
+                    <div class="modal-subtitle">
+                        Москва • Главный классический университет России
+                    </div>
+                    <div class="university-buttons-group">
+                        <a href="../ChatPage/ChatPage.html"
+                        class="university-site-btn msu-theme-btn">
+                        Спросить UniHelper AI
+                        </a>
+                        <a href="https://www.msu.ru"
+                            target="_blank"
+                            class="university-site-btn msu-theme-btn university-link-btn">
+                                Перейти на сайт вуза
+                        </a>
+                    </div>
+                    
+                    <div class="university-stats-grid">
+                        <div class="university-stat-card msu-stat">
+                            <div class="stat-number">47 000+</div>
+                            <div class="stat-label">студентов</div>
+                        </div>
+                        <div class="university-stat-card msu-stat">
+                            <div class="stat-number">40+</div>
+                            <div class="stat-label">факультетов</div>
+                        </div>
+                        <div class="university-stat-card msu-stat">
+                        <div class="stat-number">300+</div>
+                            <div class="stat-label">научных центров</div>
+                        </div>
+                    </div>
+
+                    <div class="admission-score-section">
+                        <div class="score-header">
+                            <span>Средний проходной балл (без учета ДВИ)</span>
+                            <span class="score-value">305 / 310</span>
+                        </div>
+                        <div class="score-progress-container">
+                            <div class="score-progress-bar msu-score-bar"></div>
+                    </div>
+                        <div class="score-description">
+                            Один из самых высоких конкурсов в России
+                        </div>
+                    </div>
+
+                    <div class="university-programs-section">
+                        <div class="programs-title">
+                            Популярные направления
+                        </div>
+
+                        <div class="program-tags-list">
+                            <span class="program-tag msu-tag"> Информатика и IT (ВМК)</span>
+                            <span class="program-tag msu-tag">Математика и механика</span>
+                            <span class="program-tag msu-tag">Искусственный интеллект</span>
+                            <span class="program-tag msu-tag">Биология и биоинженерия</span>
+                            <span class="program-tag msu-tag">Журналистика</span>
+                            <span class="program-tag msu-tag">Государственное управление</span>
+                            <span class="program-tag msu-tag">Международные отношения</span>
+                            <span class="program-tag msu-tag">Психология</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-description">
+                        <p>Московский государственный университет — один из самых престижных и узнаваемых университетов России, символ классического академического образования. Основанный в 1755 году Михаилом Ломоносовым, МГУ на протяжении веков остаётся флагманом отечественной науки, воспитав десятки нобелевских лауреатов, выдающихся учёных, писателей и государственных деятелей.</p>
+                        <p>
+                           Сегодня МГУ объединяет более 40 факультетов, 15 научно-исследовательских институтов, 4 музея, 6 филиалов (в том числе в Крыму, Ташкенте, Баку) и знаменитую высотку на Воробьёвых горах — архитектурный символ вуза. Университет сочетает фундаментальную подготовку с передовыми лабораториями, собственной технологической долиной и одним из крупнейших в мире университетских кампусов, где учатся и работают более 50 тысяч студентов и преподавателей.
+                        </p>
+                    </div>
+
+                    <div class="university-features-grid">
+                        <div class="feature-item msu-feature">
+                            <span class="material-icons feature-icon">domain</span>
+                            <span>Кампус и общежития</span>
+                        </div>
+                        <div class="feature-item msu-feature">
+                            <span class="material-icons feature-icon">science</span>
+                            <span>Научные центры</span>
+                        </div>
+                        <div class="feature-item msu-feature">
+                            <span class="material-icons feature-icon">public</span>
+                            <span>Международное сотрудничество</span>
+                        </div>
+                        <div class="feature-item msu-feature">
+                            <span class="material-icons feature-icon">school</span>
+                            <span>Академические традиции</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-map-container">
+                        <iframe
+                            src="https://www.google.com/maps?q=МГУ+Москва&output=embed"
+                            allowfullscreen=""
+                            loading="lazy">
+                        </iframe>
+                    </div>
+
+                    <div class="modal-footer-note">
+                        Кампус МГУ считается одним из самых узнаваемых университетских комплексов России.
+                    </div>
+                </div>
+            </div>
+
+            <!-- спбгу -->
+            <div class="university-modal" id="spbuModal">
+                <button class="modal-close-btn">&times;</button>
+
+                <div class="modal-left-side">
+                    <img src="images/spbgu-modal.jpg" 
+                    
+                    alt="СПБГУ">
+                </div>
+
+                <div class="modal-right-side">
+
+                    <h2>Санкт-Петербургский государственный университет</h2>
+
+                    <div class="modal-subtitle">
+                        Санкт-Петербург • Академические традиции и сильная наука
+                    </div>
+
+                    <div class="university-buttons-group">
+                        <a href="../ChatPage/ChatPage.html"
+                            class="university-site-btn spbu-theme-btn">
+                            Спросить UniHelper AI
+                        </a>
+                        <a href="https://spbu.ru"
+                        target="_blank"
+                        class="university-site-btn spbu-theme-btn university-link-btn">
+                        Перейти на сайт вуза
+                        </a>
+                    </div>
+                    
+                    <div class="university-stats-grid">
+                        <div class="university-stat-card spbu-stat">
+                            <div class="stat-number">32 000+</div>
+                            <div class="stat-label">студентов</div>
+                        </div>
+                        <div class="university-stat-card spbu-stat">
+                            <div class="stat-number">450+</div>
+                            <div class="stat-label">программ</div>
+                        </div>
+                        <div class="university-stat-card spbu-stat">
+                            <div class="stat-number">90+</div>
+                            <div class="stat-label">стран</div>
+                        </div>
+                    </div>
+
+                    <div class="admission-score-section">
+                        <div class="score-header">
+                            <span>Средний проходной балл</span>
+                            <span class="score-value">285 / 310</span>
+                        </div>
+                        <div class="score-progress-container">
+                            <div class="score-progress-bar spbu-score-bar"></div>
+                        </div>
+                        <div class="score-description">
+                            Сильная академическая конкуренция
+                        </div>
+                    </div>
+
+                    <div class="university-programs-section">
+                        <div class="programs-title">
+                            Популярные направления
+                        </div>
+                        <div class="program-tags-list">
+                            <span class="program-tag spbu-tag">Востоковедение и африканистика</span>
+                            <span class="program-tag spbu-tag">Международные отношения</span>
+                            <span class="program-tag spbu-tag">Юриспруденция</span>
+                            <span class="program-tag spbu-tag">История</span>
+                            <span class="program-tag spbu-tag">Филология и лингвистика</span>
+                            <span class="program-tag spbu-tag">Экономика и управление</span>
+                            <span class="program-tag spbu-tag">Лечебное дело</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-description">
+                        <p>СПбГУ — один из старейших университетов России, основанный Петром I в 1724 году. 
+                            За все время он воспитал выдающихся учёных и политиков: И.П. Павлова, В.В. Путина и Д.А. Медведева. 
+                            Сегодня университет предлагает более 500 образовательных программ, входит в топ‑300 мировых рейтингов и располагает двумя кампусами — на Васильевском острове и в Петергофе.</p>
+                        <p>Университет активно участвует в международных исследованиях и сотрудничает с более чем 400 вузами из 80 стран, включая Гарвард, Оксфорд и Пекинский университет. Доступны программы двойных дипломов, стажировки и летние школы. Партнёрство с ведущими работодателями (Яндекс, Газпром, Сбер, Эрмитаж) помогает выпускникам строить карьеру в науке, IT, бизнесе и госуправлении. А насыщенная студенческая жизнь — театры, спорт, КВН, фестивали — делает университет не только местом учёбы, но и пространством для развития личности.</p>
+                    </div>
+
+                    <div class="university-features-grid">
+                        <div class="feature-item spbu-feature">
+                            <span class="material-icons feature-icon">location_city</span>
+                            <span>Студенческий кампус</span>
+                        </div>
+                        <div class="feature-item spbu-feature">
+                            <span class="material-icons feature-icon">local_library</span>
+                            <span>Сильная гуманитарная школа</span>
+                        </div>
+                        <div class="feature-item spbu-feature">
+                            <span class="material-icons feature-icon">language</span>
+                            <span>Международные обмены</span>
+                        </div>
+                        <div class="feature-item spbu-feature">
+                            <span class="material-icons feature-icon">school</span>
+                            <span>Исторический университет</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-map-container">
+                        <iframe
+                            src="https://www.google.com/maps?q=СПБГУ+Санкт-Петербург&output=embed"
+                            allowfullscreen=""
+                            loading="lazy">
+                        </iframe>
+                    </div>
+
+                    <div class="modal-footer-note">
+                        СПбГУ входит в число наиболее престижных вузов России и Европы.
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <!-- допинфо -->

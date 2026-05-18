@@ -5,13 +5,105 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
+:root {
+    /* фоны */
+    --bg-page: linear-gradient(145deg, #eef2f5 0%, #f9fbfd 100%);
+    --chat-bg: #F8FAFC;
+    --chat-footer: white;
+    --chat-header: rgba(255,255,255,0.7);
+    --hint-bg: #EAF3FF;
+    --hint-bg-hover: #dcecff;
+
+    /*шрифты*/
+    --text-main: #0f172a;
+    --text-btn: #1e293b;
+    --text-sms: #42454F;
+    --text-input: #0f172a;
+
+    /* сообщения*/
+    --border: #eef2ff;
+    --bubble-ai: #ffffff;
+    --bubble-user: #FEEFD3;
+    --input-bg: #F1F5F9;
+    --input-border: #dbe1e9;
+    --btn-round: #e9eef3;
+    --round-btn: #CBE4F9; 
+
+    --shadow-main: rgba(0, 0, 0, 0.25);
+    
+
+    --bg-page: linear-gradient(145deg, #eef2f5 0%, #f8fbff 100%);
+    --chat-bg: #f8fafc;
+    --chat-container: rgba(255,255,255,0.82);
+    --chat-footer: rgba(255,255,255,0.88);
+    --text-soft: #64748b;
+    --text-muted: #94a3b8;
+    --accent: #4A90E2;
+    --accent-soft: #CBE4F9;
+    --hint-border: #A9C9F7;
+    --shadow-soft:  0 4px 12px rgba(0,0,0,0.04);
+}
+
+
+/*настройки темной темы */
+@media (prefers-color-scheme: dark) {
+
+    :root {
+        /* фоны */
+        --bg-page: #0b1120;
+        --chat-bg:#1E293B;
+        --chat-footer: #0e1622;
+        --chat-header: rgba(15, 23, 42, 0.863);
+        --hint-bg: #1e293bce;
+        --hint-bg-hover:  #B8C7D9;
+
+        /*шрифты*/
+        --text-main: #d6d0b5;
+        --text-btn: #d6d0b5;
+        --text-sms: #e5edf7;
+        --text-input: #e5edf7;
+        
+
+        /* сообщения */
+        --border: rgba(15, 23, 42, 0.776);
+        --bubble-ai: #1e293b;
+        --bubble-user: linear-gradient(135deg, #355f93 0%, #4A90E2 100%);
+        --input-bg: #1e293b;
+        --input-border: rgba(15, 23, 42, 0.776);
+        --btn-round: rgba(15, 23, 42, 0.607);
+        --round-btn: rgba(15, 23, 42, 0.441);
+
+        --shadow-main: #1e293beb;
+
+        --bg-page:
+            radial-gradient(circle at top,
+            #172033 0%,
+            #0b1120 45%,
+            #070b14 100%);
+
+        --chat-bg: #111827;
+        --chat-container: rgba(17,24,39,0.88);
+        --chat-footer: rgba(15,23,42,0.92);
+        --text-soft: #a8b3c7;
+        --text-muted: #7b8ba3;
+        --accent: #7cb3ff;
+        --accent-soft: rgba(124,179,255,0.18);
+        --border:   rgba(148,163,184,0.12);
+        --hint-bg: rgba(74,144,226,0.12);
+        --hint-border:  rgba(124,179,255,0.24);
+        --shadow-main: 0 25px 60px rgba(0,0,0,0.45);
+        --shadow-soft:  0 4px 18px rgba(0,0,0,0.22);
+    }
+}
+
 body {
-    background: linear-gradient(145deg, #eef2f5 0%, #f9fbfd 100%);
+    background: var(--bg-page);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 12px;
+    transition: background-color 0.35s ease, color 0.35s ease;
 }
 
         /* главный контейнер чата */
@@ -20,9 +112,9 @@ body {
     max-width: 1200px;
     height: 90vh;
     max-height: 900px;
-    background-color: #F8FAFC;  /* нейтральный светлый фон */
+    background-color: #F8FAFC; 
     border-radius: 36px 36px 32px 32px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 25px 50px -12px var(--shadow-main);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -32,9 +124,9 @@ body {
         /* HEADER */
 .chat-header {
     padding: 2px 35px;
-    background-color: rgba(255,255,255,0.7);
+    background-color: var(--chat-header);
     backdrop-filter: blur(8px);
-    border-bottom: 1.6px solid #eef2ff;  /* голубая линия #4A90E2; #FFD100 #3b82f6;*/
+    border-bottom: 1.6px solid var(--border);  /* голубая линия #4A90E2; #FFD100 #3b82f6;*/
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,7 +143,7 @@ body {
     background: none;
     border: none;
     font-size: 24px;
-    color: #1e293b;
+    color: var(--text-btn);
     cursor: pointer;  /* кнопка активная */
     opacity: 0.7;
     transition: opacity 0.2s;
@@ -88,7 +180,7 @@ body {
 .header-center span {
     font-weight: 600;
     font-size: 1.25rem;
-    color: #0f172a;
+    color: var(--text-main);
 }
 
 .header-right .settings-icon {
@@ -109,7 +201,7 @@ body {
     flex-direction: column;
     gap: 18px;
     scroll-behavior: smooth;
-    background-color: #F8FAFC;
+    background-color: var(--chat-bg);
 }
 
         /* стилизованный скроллбар */
@@ -183,8 +275,8 @@ body {
 }
 
 .ai .message-bubble {
-    background: white;
-    color: #42454F;
+    background: var(--bubble-ai);
+    color: var(--text-sms);
     border-bottom-left-radius: 6px;
     border: 1px solid rgba(74, 144, 226, 0.15);
 }
@@ -281,18 +373,18 @@ body {
 .chat-footer {
     flex-shrink: 0;
     padding: 16px 35px 10px;
-    background: white;
-    border-top: 1.6px solid #eef2ff;/*rgba(74, 144, 226, 0.25);*/
+    background: var(--chat-footer);
+    border-top: 1.6px solid var(--border);
     backdrop-filter: blur(4px);
 }
 .input-container {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: #F1F5F9;
+    background: var( --input-bg);
     border-radius: 60px;
     padding: 4px 4px 4px 20px;
-    border: 1px solid #dbe1e9;
+    border: 1px solid var(--input-border);
     transition: 0.15s;
 }
 
@@ -314,7 +406,7 @@ body {
     padding: 14px 0;
     font-size: 1rem;
     outline: none;
-    color: #0f172a;
+    color: var(--text-input);
 }
 
 .input-container input::placeholder {
@@ -343,7 +435,7 @@ body {
 }
 
 .send-btn {
-    background: #CBE4F9;
+    background: var(--btn-round);
     border: none;
     width: 52px;
     height: 52px;
@@ -355,13 +447,13 @@ body {
     font-size: 1.4rem;
     cursor: pointer;
     transition: 0.15s;
-    box-shadow: 0 6px 12px -6px #CBE4F9;
+    box-shadow: 0 6px 12px -6px var(--round-btn);
     margin-left: 5px;
 }
 
 .send-btn:hover {
-    background: #CBE4F9;
-    box-shadow: 0 6px 12px -6px #CBE4F9;
+    background: var(--round-btn);
+    box-shadow: 0 6px 12px -6px var(--round-btn);
     transform: scale(1.03);
 }
 
@@ -403,7 +495,7 @@ body {
 }
 
 .question-hint {
-    background: #EAF3FF;
+    background: var(--hint-bg);
     color: #4A90E2;
     border: 1px solid #A9C9F7;
     border-radius: 999px;
@@ -415,7 +507,7 @@ body {
 }
 
 .question-hint:hover {
-    background: #dcecff;
+    background: var(--hint-bg-hover);
 }
 
 .hint-note {

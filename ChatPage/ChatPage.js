@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendButton = document.getElementById("sendButton");
     const hintButtons = document.querySelectorAll(".question-hint");
     const API_URL = `${window.API_CONFIG.API_URL}/api/chat/message`;
+    let conversationHistory = [];
     userInput.addEventListener('input', function () {
         if (/\S/.test(this.value)) {
             sendButton.classList.add('active');
@@ -43,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function getSessionId() {
         let sessionId = localStorage.getItem("session_id");
-
         if (!sessionId) {
             sessionId = "sess_" + Math.random().toString(36).substr(2, 9);
             localStorage.setItem("session_id", sessionId);
@@ -348,7 +348,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify({ 
                     message: message,
-                    sessionId: getSessionId() 
+                    sessionId: getSessionId(),
+                    history: conversationHistory.slice(-6)
                 })
             });
 
@@ -363,7 +364,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            addAiMessage(data.answer || "Нет ответа", data.answer);
+            addAiMessage(data.answer || "Нет ответа");
+            conversationHistory.push({ role: 'User', content: message });
+            conversationHistory.push({ role: "Assistant", content: data.answer || "Нет ответа" });
         } catch (error) {
             removeTypingIndicator();
             addAiMessage("Не удалось подключиться к серверу.");
