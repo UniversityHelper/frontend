@@ -1,4 +1,5 @@
 window.addEventListener("load", () => {
+    // Analytics: track user once
     if (!localStorage.getItem('user_tracked')) {
         fetch(`${window.API_CONFIG.API_URL}/api/analytics/track-user`, {
             method: "POST"
@@ -9,39 +10,37 @@ window.addEventListener("load", () => {
         });
     }
 
+    // Analytics: track impression
     fetch(`${window.API_CONFIG.API_URL}/api/analytics/impression`, {
         method: "POST"
-    })
-        .catch(err => console.error("Impression error:", err));
+    }).catch(err => console.error("Impression error:", err));
 });
 
-const button = document.getElementById("chatBtn");
+// Ripple effect and Analytics for all buttons
+const buttons = document.querySelectorAll(".chat-button");
 
-button.addEventListener("click", function(e) {
-    let circle = document.createElement("span");
-    let diameter = Math.max(button.clientWidth, button.clientHeight);
-    let radius = diameter / 2;
+buttons.forEach(button => {
+    button.addEventListener("click", async (e) => {
+        e.preventDefault();
 
-    circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${e.clientX - button.offsetLeft - radius}px`;
-    circle.style.top = `${e.clientY - button.offsetTop - radius}px`;
-  
-    circle.classList.add("ripple");
+        // Ripple effect logic
+        let circle = document.createElement("span");
+        let diameter = Math.max(button.clientWidth, button.clientHeight);
+        let radius = diameter / 2;
 
-    const ripple = button.getElementsByClassName("ripple")[0];
-    if (ripple) {
-        ripple.remove();
-    }
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${e.clientX - button.offsetLeft - radius}px`;
+        circle.style.top = `${e.clientY - button.offsetTop - radius}px`;
+        circle.classList.add("ripple");
 
-    button.appendChild(circle);
-});
+        const existingRipple = button.querySelector(".ripple");
+        if (existingRipple) {
+            existingRipple.remove();
+        }
 
-const chatButton = document.getElementById("chatBtn");
+        button.appendChild(circle);
 
-if (chatButton) {
-    chatButton.addEventListener("click", async (e) => {
-        e.preventDefault(); // block the transition
-
+        // Analytics: track click
         try {
             await fetch(`${window.API_CONFIG.API_URL}/api/analytics/click`, {
                 method: "POST"
@@ -50,7 +49,7 @@ if (chatButton) {
             console.error("Click error:", error);
         }
 
-        window.location.href = "../ChatPage/ChatPage.html";
-    })
-}
-
+        // Navigate after analytics
+        window.location.href = button.href;
+    });
+});
