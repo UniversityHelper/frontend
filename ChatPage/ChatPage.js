@@ -180,8 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.classList.add("active");
 
             const url = isLike 
-                ? 'http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/like'
-                : 'http://unihelper-backend-2xlp1d-c53fb4-81-26-177-175.traefik.me/api/analytics/dislike';
+                ? `${window.API_CONFIG.API_URL}/api/analytics/like`
+                : `${window.API_CONFIG.API_URL}/api/analytics/dislike`;
     
             fetch(url, { method: 'POST' })
             .then(response => {
