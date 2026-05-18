@@ -22,6 +22,24 @@
     --radius-sm: 12px;
 }
 
+/*настройки темной темы */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-page: #0b1120;
+        --surface: #1e293b;
+        --primary: #7ca9cf;
+        --primary-light: rgba(124, 169, 207, 0.2);
+        --primary-soft: rgba(124, 169, 207, 0.1);
+        --text-dark: #e2e8f0;
+        --text-soft: #e2e8f0;
+        --text-muted: #94a3b8;
+        --border-light: rgba(148, 163, 184, 0.16);
+        --success: #34d399;
+        --shadow-sm: 0 10px 30px rgba(0, 0, 0, 0.35);
+        --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.45);
+    }
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(145deg, #eef2f5 0%, #f9fbfd 100%);
