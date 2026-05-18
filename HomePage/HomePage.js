@@ -108,3 +108,20 @@ document.addEventListener('keydown', (e) => {
     }
 
 });
+
+/* настройки темной темы - смена картинок*/
+const themeImages = document.querySelectorAll('.theme-image');
+function updateThemeImages() {
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    themeImages.forEach(img => {
+        img.src = isDark
+            ? img.dataset.dark
+            : img.dataset.light;
+    });
+}
+
+updateThemeImages();
+
+window.matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', updateThemeImages);
