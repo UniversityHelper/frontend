@@ -21,7 +21,6 @@ async function init() {
         console.error('Failed to fetch directions:', error);
         mockData = [];
     }
-
     // Авто-заполнение фильтров
     fillFilter(fCity, 'city');
     fillFilter(fUni, 'uni');
