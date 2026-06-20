@@ -5,7 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const hintButtons = document.querySelectorAll(".question-hint");
     const API_URL = `${window.API_CONFIG.API_URL}/api/chat/message`;
     let conversationHistory = [];
+    let isGenerating = false;
+
     userInput.addEventListener('input', function () {
+        if (isGenerating) {
+            sendButton.classList.remove('active');
+            return;
+        }
+
         if (/\S/.test(this.value)) {
             sendButton.classList.add('active');
         } else {
@@ -313,12 +320,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function sendMessage(customMessage = null) {
+        if (isGenerating)
+            return
+
         const message = customMessage || userInput.value.trim();
         if (!message) {
             return;
         }
 
+        isGenerating = true;
+        sendButton.classList.remove("active");
         addUserMessage(message);
+
         if (!customMessage) {
             userInput.value = "";
         }
@@ -332,6 +345,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 removeTypingIndicator();
                 addAiMessage(prepared.answer);
                 sendButton.disabled = false;
+                isGenerating = false;
+
+                if (/\S/.test(userInput.value)) {
+                    sendButton.classList.add("active");
+                }
+
                 userInput.focus();
             }, 500);
 
@@ -373,6 +392,12 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Fetch error:", error);
         } finally {
             sendButton.disabled = false;
+            isGenerating = false;
+
+            if (/\S/.test(userInput.value)) {
+                sendButton.classList.add("active");
+            }
+
             userInput.focus();
         }
     }
