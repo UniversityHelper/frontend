@@ -399,7 +399,7 @@ body {
     cursor: default;
 }
 
-.input-container input {
+.input-container textarea {
     flex: 1;
     border: none;
     background: transparent;
@@ -407,6 +407,8 @@ body {
     font-size: 1rem;
     outline: none;
     color: var(--text-input);
+    resize: none;
+    overflow-y: hidden;
 }
 
 .input-container input::placeholder {

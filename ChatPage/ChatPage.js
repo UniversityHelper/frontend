@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let isGenerating = false;
 
     userInput.addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+
         if (isGenerating) {
             sendButton.classList.remove('active');
             return;
@@ -334,6 +337,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!customMessage) {
             userInput.value = "";
+            userInput.style.height = 'auto';
         }
 
         sendButton.disabled = true;
@@ -407,7 +411,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     userInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
             sendMessage();
         }
     });
