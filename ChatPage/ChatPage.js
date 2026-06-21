@@ -7,6 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
     let conversationHistory = [];
     let isGenerating = false;
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const uniParam = urlParams.get("uni");
+
+    if (uniParam) {
+        userInput.value = `Хочу задать вопрос по ${uniParam}: `;
+        sendButton.classList.add("active");
+        userInput.dispatchEvent(new Event('input'));
+        userInput.focus();
+        userInput.setSelectionRange(userInput.value.length, userInput.value.length);
+    }
+
     userInput.addEventListener('input', function () {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
